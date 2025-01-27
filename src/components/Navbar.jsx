@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/tara.png"; // Ajusta la ruta si es necesario
-import "../assets/css/Navbar.css";
+import "../assets/css/navbar.css";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);

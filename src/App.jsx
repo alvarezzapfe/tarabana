@@ -2,7 +2,7 @@
 // Este es el App.jsx - HOME de Website de Tarabaña enero 2025
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/css/Navbar.css";
+import "./assets/css/navbar.css";
 import "./assets/css/index.css";
 import "./assets/css/login.css";
 import "./assets/css/contact.css";

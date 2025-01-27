@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./assets/css/login.css";
-import logoTara from "./assets/images/tarabanalogo.png"; // Asegúrate de que la ruta sea correcta
+import Logo from "./assets/images/tara.png"; // Asegúrate de que la ruta sea correcta
 
 const Login = () => {
   return (
@@ -9,11 +9,7 @@ const Login = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <img
-            src={logoTara}
-            alt="Logotipo de tarabana"
-            className="logo-small"
-          />
+          <img src={Logo} alt="Logotipo de tarabana" className="logo-small" />
           <Link to="/" className="navbar-brand"></Link>
           <button
             className="navbar-toggler"
@@ -50,8 +46,8 @@ const Login = () => {
       <footer className="py-4 bg-dark text-white text-center">
         <div className="container">
           <p>
-            © {new Date().getFullYear()} MXC Capital. Todos los derechos
-            reservados.
+            © {new Date().getFullYear()} Compañía Cervecera Tierra Mojada
+            S.A.P.I de C.V. Todos los derechos reservados.
           </p>
         </div>
       </footer>

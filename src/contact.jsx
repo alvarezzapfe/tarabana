@@ -4,7 +4,7 @@ import "./assets/css/contact.css";
 import { Link } from "react-router-dom";
 
 // Importar la imagen
-import taraLogo from "./assets/images/tarabanalogo.png";
+import Logo from "./assets/images/tara.png";
 
 const Contact = () => {
   return (
@@ -12,11 +12,7 @@ const Contact = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <img
-            src={taraLogo}
-            alt="Logotipo de Tarabana"
-            className="logo-small"
-          />
+          <img src={Logo} alt="Logotipo de Tarabana" className="logo-small" />
           <Link to="/" className="navbar-brand"></Link>
           <button
             className="navbar-toggler"

@@ -1,32 +1,28 @@
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: linear-gradient(
-    145deg,
-    #556b2f,
-    #6b8e23
-  ); /* Tonos verde olivo metálico */
-  z-index: 1000;
-  padding: 10px 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra pronunciada */
+.custom-navbar {
+  background-color: #3b5323; /* Verde oscuro popó */
+  padding: 1rem 2rem;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.navbar-brand {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #f5f5f5; /* Blanco suave para contraste */
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6); /* Apariencia metálica */
-}
-
-.navbar-nav .nav-item .nav-link {
-  color: #e0e0c1; /* Verde oliva claro */
+.custom-navbar .nav-link {
+  color: #f8f9fa; /* Blanco */
   font-size: 1rem;
-  margin-right: 20px;
-  transition: all 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
-.navbar-nav .nav-item .nav-link:hover {
-  color: #c0d6af; /* Verde oliva más claro */
-  text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.8); /* Efecto brillante */
+.custom-navbar .nav-link:hover {
+  color: #c0d6b5; /* Verde claro */
+}
+
+.custom-navbar .navbar-toggler {
+  border: none;
+}
+
+.logo-small {
+  height: 40px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo-small:hover {
+  transform: scale(1.1);
 }

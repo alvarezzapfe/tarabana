@@ -1,10 +1,12 @@
-/* General Styles */
+/* =======================
+   General Styles
+======================= */
 body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
   color: #ffffff;
-  background-color: black;
+  background-color: #000000;
 }
 
 html {
@@ -18,42 +20,12 @@ h4,
 h5,
 h6 {
   font-family: "Roboto", sans-serif;
+  margin: 0;
 }
 
-/* Hero Section */
-.hero_area {
-  margin-top: 80px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #f5f5f5; /* Blanco suave */
-  background: linear-gradient(rgba(85, 107, 47, 0.8), rgba(107, 142, 35, 0.6)),
-    url("./src/assets/images/meda.png") no-repeat center center/cover;
-  background-blend-mode: overlay;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
-}
-
-/* Carousel Items */
-.carousel-item {
-  margin-bottom: 20px;
-}
-
-.carousel-item h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.carousel-item p {
-  font-size: 1.2rem;
-  color: #c7c7c7;
-  margin-bottom: 20px;
-}
-
-/* Global Button Styles */
+/* =======================
+   Global Button Styles
+======================= */
 button {
   background-color: #6b8e23; /* Verde olivo */
   color: white;
@@ -72,37 +44,112 @@ button:hover {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Navbar Styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: linear-gradient(145deg, #001f3f, #001b34);
-  z-index: 1000;
-  padding: 10px 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+/* =======================
+   Hero Section
+======================= */
+
+/* Hero Section */
+.hero_area {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background: var(--hero-background-image) no-repeat center center/cover;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
 }
 
-.navbar-brand {
-  font-size: 1.8rem;
-  font-weight: bold;
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.hero-title .highlight {
   color: #4facfe;
+  text-shadow: 0 0 10px #4facfe;
 }
 
-.navbar-nav .nav-item .nav-link {
-  color: #e3e3e3;
-  font-size: 1rem;
-  margin-right: 20px;
-  transition: all 0.3s ease-in-out;
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #c7c7c7;
+  margin-bottom: 2rem;
 }
 
-.navbar-nav .nav-item .nav-link:hover {
-  color: #4facfe;
-  text-decoration: underline;
+.hero-button {
+  font-size: 1.2rem;
+  padding: 10px 30px;
+  border-radius: 50px;
+  background-color: #4facfe;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* About Section */
-/* About Section */
+.hero-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.8);
+}
+
+/* Electric Line Animation */
+.hero-electric-line {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 4px solid transparent;
+  border-top: 4px solid #4facfe;
+  border-radius: 50%;
+  animation: spin 4s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .hero-button {
+    font-size: 1rem;
+    padding: 8px 20px;
+  }
+
+  .hero-electric-line {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* =======================
+   About Section
+======================= */
 #about {
   padding: 60px 20px;
   background: linear-gradient(145deg, grey, #f9f9f9);
@@ -112,41 +159,50 @@ button:hover {
 
 #about h2 {
   font-size: 2.5rem;
-  font-weight: bold;
   margin-bottom: 20px;
 }
 
 #about p {
   font-size: 1.2rem;
-  color: #555;
+  line-height: 1.6;
 }
 
-/*  Sección Equipo y Features combinada  */
-/* Equipo - Tarjetas */
-/* Equipo y Features - Fondo */
+/* Versión Mobile */
+@media (max-width: 768px) {
+  #about {
+    padding: 40px 15px;
+  }
+
+  #about h2 {
+    font-size: 2rem;
+  }
+
+  #about p {
+    font-size: 1rem;
+  }
+}
+
+/* =======================
+   Team Section
+======================= */
 #team {
   background: linear-gradient(145deg, #001f3f, #002d6f);
   padding: 80px 20px;
   color: white;
 }
 
-/* Títulos */
 #team h2 {
   font-size: 2.5rem;
-  font-weight: bold;
   margin-bottom: 50px;
   color: #4facfe;
 }
 
-/* Equipo - Tarjetas */
 .team-card {
-  background: linear-gradient(145deg, #ffffff, #f1f1f1);
+  background: #f1f1f1;
   color: #333;
   border-radius: 20px;
   padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .team-card:hover {
@@ -162,89 +218,31 @@ button:hover {
   margin-bottom: 15px;
 }
 
-.team-card h5 {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #001f3f;
-  margin-bottom: 5px;
+/* Versión Mobile */
+@media (max-width: 768px) {
+  #team {
+    padding: 60px 15px;
+  }
+
+  #team h2 {
+    font-size: 2rem;
+  }
+
+  .team-card {
+    padding: 15px;
+  }
+
+  .team-card img {
+    width: 80px;
+    height: 80px;
+  }
 }
 
-.team-card p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Botón de flecha para expandir */
-.team-card button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: #4facfe;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.team-card button:hover {
-  background: #003d99;
-}
-
-/* Contenido expandido */
-.team-card .expanded-content {
-  display: none;
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 15px;
-}
-
-.team-card.expanded .expanded-content {
-  display: block;
-}
-
-/* Features - Tarjetas */
-.feature-card {
-  background: linear-gradient(145deg, #ffffff, #f1f1f1);
-  text-align: center;
-  border-radius: 15px;
-  padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.feature-card i {
-  font-size: 3rem;
-  color: #4facfe;
-  margin-bottom: 20px;
-}
-
-.feature-card h4 {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #001f3f;
-  margin-bottom: 10px;
-}
-
-.feature-card p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Sección Línea - Cervezas */
-/* Línea Section - Mejorada */
+/* =======================
+   Cervezas Section
+======================= */
 .linea-section {
-  padding: 120px 40px; /* Área más amplia */
+  padding: 120px 40px;
   background: linear-gradient(145deg, #2c3e50, #556b2f),
     url("../assets/images/beer-background.png") no-repeat center center/cover;
   background-blend-mode: overlay;
@@ -252,28 +250,22 @@ button:hover {
   text-align: center;
 }
 
-/* Título de la Sección */
 .linea-section h2 {
   font-size: 2.8rem;
-  font-weight: 300; /* Letra delgada */
+  font-weight: 300;
   color: #a8d08d;
   margin-bottom: 60px;
   text-transform: uppercase;
 }
 
-/* Grid para las Cervezas */
 .beer-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(220px, 1fr)
-  ); /* Rejilla adaptable */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
   justify-items: center;
   align-items: start;
 }
 
-/* Tarjetas de Cerveza */
 .beer-card {
   background: #ffffff;
   color: #2c3e50;
@@ -281,216 +273,46 @@ button:hover {
   padding: 20px;
   text-align: left;
   width: 100%;
-  max-width: 260px; /* Tamaño uniforme */
+  max-width: 260px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease,
     background-color 0.3s ease;
 }
 
 .beer-card:hover {
-  transform: scale(1.08); /* Zoom ligero */
+  transform: scale(1.08);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   background-color: #e8f5e9;
 }
 
-/* Icono de cerveza */
-.beer-icon {
-  text-align: center;
-  margin-bottom: 15px;
-  color: #6b8e23; /* Verde vibrante */
-  font-size: 3rem; /* Icono más grande */
-}
-
-/* Texto en las Tarjetas */
-.beer-name {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: #556b2f;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.beer-name:hover {
-  color: #2c3e50;
-}
-
-.beer-style,
-.beer-abv,
-.beer-ibu,
-.beer-hops {
-  font-size: 0.9rem; /* Letra más pequeña */
-  font-weight: 300;
-  line-height: 1.5;
-  margin-bottom: 5px;
-  color: #2f4f4f;
-}
-
-/* Responsivo */
+/* Versión Mobile */
 @media (max-width: 768px) {
   .linea-section {
-    padding: 100px 20px; /* Reducimos espacio para móviles */
+    padding: 100px 20px;
   }
 
   .linea-section h2 {
     font-size: 2rem;
   }
-}
 
-/*  testimonials  */
-
-#testimonials {
-  padding: 60px 20px;
-}
-
-blockquote {
-  font-size: 1.2rem;
-  font-style: italic;
-  border-left: 4px solid #4facfe;
-  padding-left: 15px;
-  margin-bottom: 20px;
-}
-
-/* Sección history */
-/* Sección Historia */
-.history-section {
-  padding: 100px 20px;
-  background: linear-gradient(
-    145deg,
-    #002d40,
-    #001b34
-  ); /* Fondo verde oscuro a azul marino */
-  color: #ffffff;
-  position: relative;
-  overflow: hidden;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 50px;
-  color: #a3c4f3; /* Azul claro */
-  text-transform: uppercase;
-}
-
-/* Línea del Tiempo */
-.timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 40px;
-  text-align: center;
-  width: 250px; /* Cajas más pequeñas */
-}
-
-.timeline-year {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2e8b57; /* Verde olivo oscuro */
-  margin-bottom: 10px;
-}
-
-.timeline-box {
-  background: rgba(255, 255, 255, 0.9); /* Fondo blanco translúcido */
-  color: #0a1432; /* Azul oscuro */
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timeline-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.timeline-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #305fba; /* Azul medio */
-}
-
-.timeline-description {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #333;
-}
-
-/* Flecha */
-.timeline-arrow {
-  width: 2px;
-  height: 40px;
-  background: linear-gradient(to bottom, #4facfe, #a3c4f3);
-  margin: 10px 0;
-}
-
-/* Animación de Lighting */
-.lighting-animation {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom, #4facfe, transparent);
-  animation: lighting 3s infinite linear;
-  z-index: -1;
-}
-
-@keyframes lighting {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
+  .beer-card {
+    max-width: 200px;
   }
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .timeline-item {
-    width: 90%;
-  }
-
-  .timeline-box {
-    padding: 10px 15px;
-  }
-}
-
-/* Footer Section */
-/* Footer Section */
+/* =======================
+   Footer Section
+======================= */
 .footer-section {
   background: linear-gradient(145deg, #001b34, #001f3f);
-  padding: 140px 0; /* Reducido 30% */
+  padding: 60px 20px;
   color: white;
   font-size: 0.9rem;
 }
 
-.footer-section h5 {
-  font-size: 1.3rem; /* Ajustado ligeramente */
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.footer-section a {
-  color: white;
-  text-decoration: none;
-}
-
-.footer-section a:hover {
-  color: #4facfe;
-  text-decoration: underline;
-}
-
-.footer-section .small {
-  color: #c7c7c7;
-  font-size: 0.85rem;
+.footer-section .footer-logo {
+  width: 120px;
+  margin-bottom: 20px;
 }
 
 .footer-section p {
@@ -498,104 +320,39 @@ blockquote {
   line-height: 1.8;
 }
 
-/* Logotipo */
-.footer-logo {
-  width: 120px; /* Más pequeño */
-  height: auto;
-  margin-bottom: 20px;
-}
-
-/* Línea Inferior */
 .footer-line {
   border-top: 1px solid #4facfe;
   margin: 20px auto;
-  width: 60%; /* Centrada y más delgada */
+  width: 60%;
 }
 
 .footer-emoji {
   font-size: 1rem;
-  margin-top: 10px;
   color: #4facfe;
   font-weight: bold;
 }
 
-/* Responsive Adjustments */
+/* Versión Mobile */
 @media (max-width: 768px) {
   .footer-section {
     text-align: center;
   }
 
-  .footer-section .row > div {
-    margin-bottom: 20px;
-  }
-
   .footer-line {
-    width: 80%; /* Más ancho en pantallas pequeñas */
+    width: 80%;
+  }
+
+  .footer-logo {
+    width: 100px;
   }
 }
 
-/*   LOGO SMALL */
-
-/* Tamaño personalizado para el logotipo */
+/*  LOGO  */
 .logo-small {
-  height: 350px; /* Aumenta la altura para hacerlo más grande */
-  width: auto; /* Ajusta automáticamente el ancho */
-  max-width: 100%; /* Evita que exceda el contenedor */
-  margin-top: 10px; /* Espaciado opcional */
-  object-fit: contain; /* Mantén las proporciones sin recortar */
-  transition: transform 0.2s ease-in-out; /* Para animación */
+  height: 40px;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Efecto hover para el logotipo */
 .logo-small:hover {
-  transform: scale(1.8); /* Aumenta ligeramente el tamaño al pasar el mouse */
-}
-
-/* Tamaño personalizado en pantallas medianas */
-@media (max-width: 768px) {
-  .logo-small {
-    height: 250px; /* Ajusta el tamaño para pantallas medianas */
-  }
-}
-
-/* Tamaño personalizado en pantallas pequeñas */
-@media (max-width: 480px) {
-  .logo-small {
-    height: 150px; /* Ajusta el tamaño para pantallas pequeñas */
-  }
-}
-
-/*   AOS   */
-/* Animaciones de entrada */
-[data-aos="fade-up"] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-aos="fade-up"].aos-animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-[data-aos="fade-left"] {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-aos="fade-left"].aos-animate {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-[data-aos="fade-right"] {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-[data-aos="fade-right"].aos-animate {
-  opacity: 1;
-  transform: translateX(0);
+  transform: scale(1.1);
 }

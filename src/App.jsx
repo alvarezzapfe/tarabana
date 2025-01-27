@@ -1,8 +1,8 @@
-// Este es el App.jsx de Website de Tarabaña enero 2025
-
-import React, { useState, useEffect } from "react";
+// Este es el App.jsx - HOME de Website de Tarabaña enero 2025
+// Este es el App.jsx - HOME de Website de Tarabaña enero 2025
+import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/css/navbar.css";
+import "./assets/css/Navbar.css";
 import "./assets/css/index.css";
 import "./assets/css/login.css";
 import "./assets/css/contact.css";
@@ -10,27 +10,22 @@ import "./assets/css/taproom.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import heroBackgroundImage from "./assets/images/fv.jpg";
 
-// Importar la imagen
-import tarabanalogo from "./assets/images/tarabanalogo.png";
+// Importar componentes e imágenes
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Login from "./login";
-import Tap from "./TapRoom";
-
 import Contact from "./contact";
+import TapRoom from "./TapRoom";
+import Logo from "./assets/images/tara.png";
+
 import team1 from "./assets/images/team1.png";
 import team2 from "./assets/images/team2.png";
 import team3 from "./assets/images/team3.png";
 import team4 from "./assets/images/team4.png";
 import team5 from "./assets/images/team5.png";
 import team6 from "./assets/images/team6.png";
-import contigo from "./assets/images/contigo.png";
-import mac from "./assets/images/mac.png";
-import totalplay from "./assets/images/totalplay.png";
-import elektra from "./assets/images/elektra.png";
-import fortem from "./assets/images/fortem.png";
-import dila from "./assets/images/dila.png";
-import TapRoom from "./TapRoom";
 
 const beers = [
   {
@@ -52,7 +47,7 @@ const beers = [
     style: "Hazy IPA",
     abv: "5.2%",
     ibu: "30",
-    hops: "Idaho 7, Centennial,..",
+    hops: "Idaho 7, Centennial",
   },
   {
     name: "Chula Vista",
@@ -94,92 +89,39 @@ const BeerCard = ({ beer }) => (
 );
 
 const Home = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
   useEffect(() => {
     AOS.init({
       duration: 600,
       easing: "ease-out-cubic",
       once: true,
     });
+
+    // Set background image as CSS variable for the hero section
+    document.documentElement.style.setProperty(
+      "--hero-background-image",
+      `url(${heroBackgroundImage})`
+    );
   }, []);
 
   return (
     <div>
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <a href="#" className="navbar-brand"></a>
-          <img
-            src={tarabanalogo}
-            alt="Logotipo de Tarabaña"
-            className="logo-small"
-          />
-
-          <button className="navbar-toggler" type="button" onClick={toggleMenu}>
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a href="#hero" className="nav-link">
-                  Inicio
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#about" className="nav-link">
-                  Acerca de
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#team" className="nav-link">
-                  Equipo
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#linea" className="nav-link">
-                  Cervezas de Línea
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/TapRoom" className="nav-link">
-                  Tap Room
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a href="#history" className="nav-link">
-                  Historia
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/contact" className="nav-link">
-                  Contacto
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a href="/login" className="btn btn-outline-light ms-3">
-                  Login
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <header id="hero" className="hero_area text-center text-white">
-        <div className="container py-5">
-          <h1 className="display-4">
-            Bienvenido a Fábrica de Cervezas Tarabaña
+      <Navbar />
+      {/* Hero Section */}
+      <header id="hero" className="hero_area text-center">
+        <div className="hero-content">
+          <div className="hero-electric-line"></div>
+          <h1 className="hero-title">
+            Bienvenido a <span className="highlight">Tarabaña</span>
           </h1>
-          <p className="lead">Fabricamos cerveza buena para todos.</p>
-          <button className="btn btn-light btn-lg mt-3">Conócenos</button>
+          <p className="hero-subtitle">
+            Donde la tecnología y la cerveza se encuentran
+          </p>
+          <button className="hero-button btn btn-light btn-lg mt-3">
+            Conócenos
+          </button>
         </div>
       </header>
+
       {/* About Section */}
       <section id="about" className="py-5 bg-light text-center">
         <div className="container">
@@ -191,11 +133,7 @@ const Home = () => {
             ayudar al sector de Cerveza Artesanal a seguir ofreciendo mejores
             cheves.
           </p>
-          <img
-            src={tarabanalogo}
-            alt="Logotipo de Tarabana"
-            className="logo-small"
-          />
+          <img src={Logo} alt="Logotipo de Tarabana" className="logo-small" />
         </div>
       </section>
       {/* Equipo y Features Section */}
@@ -411,7 +349,7 @@ const Home = () => {
           <div className="row justify-content-center mb-4">
             <div className="col-md-4 text-center">
               <img
-                src={tarabanalogo}
+                src={Logo}
                 alt="Logotipo de Tarabana"
                 className="footer-logo"
               />

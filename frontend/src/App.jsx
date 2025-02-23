@@ -26,7 +26,7 @@ import {
 } from "react-router-dom";
 
 // Componentes globales
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import Login from "./login";
 import Contact from "./contact";

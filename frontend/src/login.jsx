@@ -1,6 +1,6 @@
 // src/login.jsx
 import React, { useState } from "react";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import "./assets/css/login.css";
 

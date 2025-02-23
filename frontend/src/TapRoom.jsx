@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 // Componentes reutilizables
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 
 // Asset

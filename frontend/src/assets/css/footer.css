@@ -1,0 +1,56 @@
+/* =======================
+   Footer Section
+======================= */
+.footer-section {
+  background: linear-gradient(145deg, #001b34, #001f3f);
+  padding: 60px 20px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.footer-section .footer-logo {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.footer-section p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.footer-line {
+  border-top: 1px solid #4facfe;
+  margin: 20px auto;
+  width: 60%;
+}
+
+.footer-emoji {
+  font-size: 1rem;
+  color: #4facfe;
+  font-weight: bold;
+}
+
+/* Versión Mobile */
+@media (max-width: 768px) {
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-line {
+    width: 80%;
+  }
+
+  .footer-logo {
+    width: 100px;
+  }
+}
+
+/*  LOGO  */
+.logo-small {
+  height: 40px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo-small:hover {
+  transform: scale(1.1);
+}

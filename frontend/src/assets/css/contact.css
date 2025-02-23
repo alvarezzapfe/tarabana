@@ -1,0 +1,147 @@
+/* contact.css */
+
+/* Estilos globales para la página de Contacto */
+.contact-page {
+  font-family: "Helvetica Neue", sans-serif;
+  background: #f8f9fa;
+  color: #333;
+}
+
+/* Sección de Contacto */
+.contact-section {
+  padding: 80px 0;
+}
+
+/* Títulos y subtítulos */
+.contact-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: #002d40;
+  margin-bottom: 20px;
+}
+
+.contact-subtitle {
+  font-size: 1.25rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* Configuración para que las cajas se alineen y tengan igual altura */
+.contact-section .row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* Asegura que ambas columnas se estiren */
+}
+
+.contact-section .col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tanto el formulario como la info ocuparán el mismo espacio */
+.contact-form,
+.contact-info {
+  flex: 1;
+  min-height: 400px; /* Puedes ajustar este valor según lo necesites */
+  box-sizing: border-box;
+}
+
+/* Formulario de Contacto */
+.contact-form {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.contact-form .form-label {
+  font-weight: 600;
+  color: #002d40;
+}
+
+.contact-form .form-control {
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form .form-control:focus {
+  border-color: #1abc9c;
+  box-shadow: none;
+}
+
+.contact-submit {
+  background: linear-gradient(145deg, #1abc9c, #16a085);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-submit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Información de Contacto */
+.contact-info {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.contact-info h3 {
+  font-size: 1.75rem;
+  color: #002d40;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Mapa Responsive */
+.map-responsive {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* Proporción 16:9 */
+  height: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.map-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+  .contact-title {
+    font-size: 2rem;
+  }
+  .contact-subtitle {
+    font-size: 1.1rem;
+  }
+  .contact-form,
+  .contact-info {
+    padding: 20px;
+    min-height: auto;
+  }
+  .contact-info h3 {
+    font-size: 1.5rem;
+  }
+  .contact-info p {
+    font-size: 1rem;
+  }
+}

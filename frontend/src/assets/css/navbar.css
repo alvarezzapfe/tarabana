@@ -1,0 +1,46 @@
+.custom-navbar {
+  background: linear-gradient(
+    45deg,
+    #2c3e50,
+    #34495e
+  ); /* Degradado azul oscuro */
+  padding: 1rem 2rem;
+  transition: background 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.custom-navbar .nav-link {
+  color: #ecf0f1; /* Gris claro */
+  font-size: 1rem;
+  transition: color 0.3s ease-in-out;
+  margin-right: 1rem;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #1abc9c; /* Acento teal */
+}
+
+.custom-navbar .navbar-toggler {
+  border: none;
+}
+
+.logo-small {
+  height: 45px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo-small:hover {
+  transform: scale(1.1);
+}
+
+/* Estilo para el botón de Login */
+.custom-navbar .btn-outline-light {
+  border-color: #1abc9c;
+  color: #1abc9c;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.custom-navbar .btn-outline-light:hover {
+  background: #1abc9c;
+  color: #ffffff;
+}

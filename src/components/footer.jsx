@@ -31,17 +31,22 @@ const Footer = () => {
             <h5>Enlaces</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="#linea" className="text-white text-decoration-none">
+                <a href="#hero" className="text-white text-decoration-none">
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="#cervezas" className="text-white text-decoration-none">
                   Cervezas de Línea
                 </a>
               </li>
               <li>
-                <a href="#equipo" className="text-white text-decoration-none">
-                  Equipo
+                <a href="/contact" className="text-white text-decoration-none">
+                  Contacto
                 </a>
               </li>
               <li>
-                <a href="#history" className="text-white text-decoration-none">
+                <a href="#historia" className="text-white text-decoration-none">
                   Historia
                 </a>
               </li>
@@ -59,7 +64,7 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <a
-                  href="https://www.untapped.com"
+                  href="https://www.untappd.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white text-decoration-none"

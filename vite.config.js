@@ -3,12 +3,13 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  base: "./",
   build: {
-    outDir: "dist", // Asegura que Vercel tome la carpeta correcta
+    outDir: "dist",
   },
   server: {
     fs: {
-      allow: [".."], // Permite acceder a archivos fuera del directorio raíz si es necesario
+      allow: [".."], // Esto permite acceder a archivos fuera de `frontend`
     },
   },
 });

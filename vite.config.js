@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: "/",
   build: {
     outDir: "dist",
   },
@@ -11,5 +11,9 @@ export default defineConfig({
     fs: {
       allow: [".."], // Esto permite acceder a archivos fuera de `frontend`
     },
+  },
+  preview: {
+    port: 4173,
+    strictPort: true,
   },
 });

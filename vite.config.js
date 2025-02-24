@@ -2,13 +2,13 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  root: "frontend", // Le indica a Vite que el proyecto está en frontend/
+  root: "frontend", // Define la raíz del proyecto
   build: {
-    outDir: "dist", // Generará el build en frontend/dist
+    outDir: "dist", // Output en frontend/dist
   },
   server: {
     fs: {
-      allow: [".."], // Permite acceder a archivos fuera de frontend
+      allow: [".."], // Permite acceder a archivos fuera de frontend/
     },
   },
 });

@@ -3,13 +3,13 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  root: "frontend", // Asegura que Vite trabaje dentro de `frontend`
+  root: "frontend", // 📌 Especifica que el proyecto se encuentra dentro de `frontend`
   build: {
-    outDir: "dist", // Genera la build en `frontend/dist`
+    outDir: "dist", // 📌 La carpeta de salida sigue siendo `dist`
   },
   server: {
     fs: {
-      allow: [".."],
+      allow: [".."], // Permite acceso a archivos fuera de `frontend`
     },
   },
 });

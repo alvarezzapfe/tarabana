@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   root: "frontend", // Asegura que Vite trabaje dentro de `frontend`
   build: {
-    outDir: "dist", // Deja esto así para que genere `dist` dentro de `frontend`
+    outDir: "dist", // Genera la build en `frontend/dist`
   },
   server: {
     fs: {

@@ -37,13 +37,21 @@ import Logo from "./assets/images/tara.png";
 
 // Array de cervezas
 const beers = [
-  { name: "Sílice", style: "Czech Pils", abv: "5.1%", ibu: "25", hops: "Saaz" },
+  {
+    name: "Sílice",
+    style: "Czech Pils",
+    abv: "5.1%",
+    ibu: "25",
+    hops: "Saaz",
+    image: "./assets/images/czech-pils.png",
+  },
   {
     name: "Magma",
     style: "Doble IPA",
     abv: "8.5%",
     ibu: "55",
     hops: "Citra, Mosaic",
+    image: "./assets/images/double-ipa.png",
   },
   {
     name: "Caliza",
@@ -51,6 +59,7 @@ const beers = [
     abv: "5.2%",
     ibu: "30",
     hops: "Idaho 7, Centennial",
+    image: "./assets/images/hazy-ipa.png",
   },
   {
     name: "Chula Vista",
@@ -58,6 +67,7 @@ const beers = [
     abv: "5.0%",
     ibu: "35",
     hops: "Amarillo, Centennial",
+    image: "./assets/images/west-coast-ipa.png",
   },
   {
     name: "Brisa",
@@ -65,16 +75,23 @@ const beers = [
     abv: "4.5%",
     ibu: "25",
     hops: "Simcoe, Chinook",
+    image: "./assets/images/session-ipa.png",
+  },
+  {
+    name: "Roca Negra",
+    style: "Black IPA",
+    abv: "6.8%",
+    ibu: "50",
+    hops: "Columbus, Chinook",
+    image: "./assets/images/black-ipa.png",
   },
 ];
 
 // Componente para mostrar cada cerveza
 const BeerCard = ({ beer }) => (
   <div className="beer-card" data-aos="fade-up">
-    <div className="beer-card-content">
-      <div className="beer-icon">
-        <i className="fas fa-beer fa-3x"></i>
-      </div>
+    <div className="beer-background"></div> {/* Efecto verde-rosa */}
+    <div className="beer-content">
       <h5 className="beer-name">{beer.name}</h5>
       <p className="beer-style">
         <strong>Estilo:</strong> {beer.style}
@@ -83,7 +100,7 @@ const BeerCard = ({ beer }) => (
         <strong>ABV:</strong> {beer.abv}
       </p>
       <p className="beer-ibu">
-        <strong>IBUs:</strong> {beer.ibu}
+        <strong>IBU:</strong> {beer.ibu}
       </p>
       <p className="beer-hops">
         <strong>Lúpulos:</strong> {beer.hops}
@@ -109,7 +126,11 @@ const ScrollToHash = () => {
 
 const awardsData = [
   { name: "Aro Rojo", location: "Monterrey", img: aro },
-  { name: "Ensenara Beer Fest", location: "Cocepa Ensenada", img: ensenada },
+  {
+    name: "Ensenada Beer Fest   ",
+    location: "Copa Cervecera del Pacífico Ensenada",
+    img: ensenada,
+  },
   { name: "Cerveza México", location: "Ciudad de México", img: cervezaMexico },
 ];
 
@@ -117,6 +138,7 @@ const Awards = () => (
   <section id="premios" className="awards-section">
     <div className="container">
       <h2 className="section-title">Premios y Competencias</h2>
+
       <div className="awards-grid">
         {awardsData.map((award, index) => (
           <div className="award-card" key={index} data-aos="fade-up">
@@ -125,6 +147,38 @@ const Awards = () => (
             <p>{award.location}</p>
           </div>
         ))}
+      </div>
+
+      {/* Nueva Tabla de Premios */}
+      <div className="awards-table">
+        <h3>Medallas Ganadas</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Black IPA</th>
+              <th>Belgian Strong Ale</th>
+              <th>Czech Pilsner</th>
+              <th>Double IPA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2024</td>
+              <td>🥈 Plata</td>
+              <td>🥈 Plata</td>
+              <td>🥉 Bronce</td>
+              <td>🥈 Plata</td>
+            </tr>
+            <tr>
+              <td>2025</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -181,7 +235,11 @@ const Home = () => {
       {/* Cervezas Section */}
       <section id="cervezas" className="beers-section">
         <div className="container">
-          <h2 className="section-title">Nuestra Selección</h2>
+          <h2 className="section-title">Nuestras Cervezas de Línea</h2>
+          <p className="beer-description">
+            Explora nuestra selección de cervezas artesanales. Ven a nuestro Tap
+            en Condesa y conoce nuestras cervezas de línea y temporada.
+          </p>
           <div className="beer-grid">
             {beers.map((beer, index) => (
               <BeerCard key={index} beer={beer} />

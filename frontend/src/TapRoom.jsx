@@ -36,9 +36,11 @@ const TapRoom = () => {
                   <strong>Dirección:</strong> Tamaulipas 224, Ciudad de México
                 </p>
                 <p>
-                  <strong>Horario:</strong> Lunes a Domingo: 5:00 PM - 2:00 AM
+                  <strong>Horario:</strong> Martes a Sábado: 13:00 - 23:00
                 </p>
                 <p>
+                  El Caracol abre sus puerta el 5 de abril al público
+                  <p></p>
                   Sumérgete en un ambiente moderno y sofisticado donde la
                   tradición cervecera se une con la innovación para brindarte
                   una experiencia única. Disfruta de espacios exclusivos y la

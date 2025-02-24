@@ -2,14 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "./",
   plugins: [react()],
+  base: "./", // Para evitar problemas de rutas en producción
   build: {
-    outDir: "dist",
+    outDir: "dist", // Confirma que el build se genera en dist/
   },
   server: {
     fs: {
-      allow: [".."],
+      allow: [".."], // Permitir acceso a archivos fuera de frontend/
     },
   },
 });

@@ -3,13 +3,13 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./",
+  base: "./", // Asegura rutas relativas en producción
   build: {
-    outDir: "dist",
+    outDir: "dist", // Output de la build en `frontend/dist`
   },
   server: {
     fs: {
-      allow: [".."],
+      allow: [".."], // Permite acceder a archivos fuera de `frontend`
     },
   },
 });

@@ -151,107 +151,140 @@ button:hover {
 }
 
 /* =======================
-   Cervezas Section
+   Cervezas Tarjetas Grandes & Uniformes
 ======================= */
-/* =======================
-   Sección de Cervezas Mejorada
-======================= */
+
 .beers-section {
   padding: 100px 20px;
-  background: #cfd8dc; /* Gris azul claro como el navbar */
-  color: #333;
+  background: linear-gradient(
+    to right,
+    #fceabb,
+    #f8b500
+  ); /* Fondo tipo dorado ámbar */
+  color: #2c2c2c;
   text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 
 .beers-section .section-title {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 20px;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1b1b1b;
+  margin-bottom: 40px;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
 }
 
 .beer-description {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 50px;
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  line-height: 1.6;
 }
 
 .beer-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columnas por fila */
-  gap: 30px;
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
 }
 
 .beer-card {
-  position: relative;
-  width: 320px;
-  height: 420px;
-  border-radius: 20px;
+  width: 360px;
+  height: 520px;
+  background: #ffffff;
+  border-radius: 25px;
   overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-.beer-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* Fondo verde-rosa con efecto */
-.beer-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #ff69b4 10%, #00ff7f 90%);
-  filter: blur(20px);
-  z-index: -1;
-}
-
-.beer-content {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
+}
+
+.beer-image {
+  height: 220px;
+  width: 100%;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Espacio interior */
+  box-sizing: border-box;
 }
 
 .beer-image img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
+  max-height: 150px; /* Controla el tamaño de la chela */
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.beer-info {
-  padding: 15px;
+.beer-card:hover .beer-image img {
+  transform: scale(1.05); /* Zoom suave al hacer hover */
+}
+
+.beer-content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .beer-name {
-  font-size: 1.6rem;
-  color: #2c3e50;
+  font-size: 1.8rem;
+  color: #e65100;
+  font-weight: bold;
   margin-bottom: 10px;
+  text-align: left;
 }
 
-.beer-style,
+.beer-style {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
 .beer-abv,
 .beer-ibu,
 .beer-hops {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #616161;
+  margin-bottom: 6px;
+  text-align: left;
 }
 
-/* Responsivo */
-@media (max-width: 1024px) {
-  .beer-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 por fila en tablets */
-  }
+/* Etiqueta diagonal */
+.beer-tag {
+  position: absolute;
+  top: 20px;
+  right: -30px;
+  background: #ff5722;
+  color: white;
+  padding: 6px 20px;
+  font-size: 0.9rem;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Responsive ajustes */
 @media (max-width: 768px) {
-  .beer-grid {
-    grid-template-columns: repeat(1, 1fr); /* 1 por fila en móvil */
+  .beer-card {
+    width: 100%;
+    height: auto;
+  }
+
+  .beers-section .section-title {
+    font-size: 2.4rem;
+  }
+
+  .beer-description {
+    font-size: 1.1rem;
   }
 }
 

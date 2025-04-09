@@ -69,7 +69,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-white text-decoration-none"
                 >
-                  Untapped
+                  Untappd
                 </a>
               </li>
             </ul>

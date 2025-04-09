@@ -13,6 +13,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import heroBackgroundImage from "./assets/images/fv.jpg";
 import magma from "./assets/images/magma.jpg";
 
+import pilsner from "./assets/images/magma.png";
+import doubleIPA from "./assets/images/magma.png";
+import hazyIPA from "./assets/images/magma.png";
+import westCoast from "./assets/images/magma.png";
+import sessionIPA from "./assets/images/magma.png";
+import blackIPA from "./assets/images/magma.png";
+
 import aro from "./assets/images/aro-rojo.png";
 import ensenada from "./assets/images/ebf.png";
 import cervezaMexico from "./assets/images/cerveza-mexico.png";
@@ -42,16 +49,14 @@ const beers = [
     style: "Czech Pils",
     abv: "5.1%",
     ibu: "25",
-    hops: "Saaz",
-    image: "./assets/images/czech-pils.png",
+    image: pilsner,
   },
   {
     name: "Magma",
     style: "Doble IPA",
     abv: "8.5%",
     ibu: "55",
-    hops: "Citra, Mosaic",
-    image: "./assets/images/double-ipa.png",
+    image: doubleIPA,
   },
   {
     name: "Caliza",
@@ -59,7 +64,7 @@ const beers = [
     abv: "5.2%",
     ibu: "30",
     hops: "Idaho 7, Centennial",
-    image: "./assets/images/hazy-ipa.png",
+    image: hazyIPA,
   },
   {
     name: "Chula Vista",
@@ -67,7 +72,7 @@ const beers = [
     abv: "5.0%",
     ibu: "35",
     hops: "Amarillo, Centennial",
-    image: "./assets/images/west-coast-ipa.png",
+    image: westCoast,
   },
   {
     name: "Brisa",
@@ -75,22 +80,24 @@ const beers = [
     abv: "4.5%",
     ibu: "25",
     hops: "Simcoe, Chinook",
-    image: "./assets/images/session-ipa.png",
+    image: sessionIPA,
   },
   {
-    name: "Roca Negra",
+    name: "Ónix",
     style: "Black IPA",
     abv: "6.8%",
     ibu: "50",
     hops: "Columbus, Chinook",
-    image: "./assets/images/black-ipa.png",
+    image: blackIPA,
   },
 ];
 
 // Componente para mostrar cada cerveza
 const BeerCard = ({ beer }) => (
   <div className="beer-card" data-aos="fade-up">
-    <div className="beer-background"></div> {/* Efecto verde-rosa */}
+    <div className="beer-image">
+      <img src={beer.image} alt={beer.name} />
+    </div>
     <div className="beer-content">
       <h5 className="beer-name">{beer.name}</h5>
       <p className="beer-style">
@@ -102,9 +109,11 @@ const BeerCard = ({ beer }) => (
       <p className="beer-ibu">
         <strong>IBU:</strong> {beer.ibu}
       </p>
-      <p className="beer-hops">
-        <strong>Lúpulos:</strong> {beer.hops}
-      </p>
+      {beer.hops && (
+        <p className="beer-hops">
+          <strong>Lúpulos:</strong> {beer.hops}
+        </p>
+      )}
     </div>
   </div>
 );
@@ -203,9 +212,7 @@ const Home = () => {
         <div className="hero-overlay">
           <div className="hero-content text-center">
             <h1 className="hero-title">Bienvenido a Tarabaña</h1>
-            <p className="hero-subtitle">
-              La experiencia definitiva en cerveza artesanal.
-            </p>
+            <p className="hero-subtitle">Una Cerveza para todos.</p>
             <button className="hero-button btn btn-light">Descubre más</button>
           </div>
         </div>

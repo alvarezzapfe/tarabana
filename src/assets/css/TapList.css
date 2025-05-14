@@ -1,0 +1,56 @@
+.taplist-page {
+  background-color: #fffdf8;
+  font-family: "Helvetica Neue", sans-serif;
+  color: #1e1e1e;
+  padding-bottom: 4rem;
+}
+
+.taplist-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.beer-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.beer-table th {
+  background-color: #111;
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.beer-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #eaeaea;
+  vertical-align: top;
+}
+
+.beer-table tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+
+.beer-table tr:hover {
+  background-color: #f1f1f1;
+}

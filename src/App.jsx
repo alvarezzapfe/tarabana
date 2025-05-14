@@ -38,6 +38,7 @@ import Footer from "./components/footer";
 import Login from "./login";
 import Contact from "./contact";
 import TapRoom from "./TapRoom";
+import TapList from "./TapList"; // Si el archivo TapList.jsx está en src/
 
 // Logo (si lo necesitas en otras secciones)
 import Logo from "./assets/images/tara.png";
@@ -315,6 +316,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/TapRoom" element={<TapRoom />} />
+        <Route path="/taplist" element={<TapList />} />
       </Routes>
     </Router>
   );

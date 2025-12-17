@@ -15,7 +15,7 @@ import magmaImg from "./assets/images/magma.jpg";
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import Contact from "./contact";
 import TapRoom from "./TapRoom";
 import TapList from "./TapList";

@@ -1,538 +1,357 @@
-/* =======================
-   General Styles
-======================= */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
-  color: #ffffff;
-  background-color: #000000;
+/* src/assets/css/index.css */
+:root{
+  --bg0:#f7f3ea;
+  --bg1:#fffaf2;
+  --ink:#0f1b2a;
+  --muted:#4b5b70;
+  --card: rgba(255,255,255,0.72);
+  --border: rgba(15,27,42,0.10);
+  --shadow: 0 18px 45px rgba(15,27,42,0.10);
+  --accentA:#ffd780;
+  --accentB:#78beff;
+
+  /* Ajustes finos del hero */
+  --hero-overlay: rgba(255,250,242,0.78); /* baja si quieres ver más foto */
 }
 
-html {
-  scroll-behavior: smooth;
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+  color: var(--ink);
+  background: radial-gradient(900px 500px at 20% 0%, rgba(255,215,128,0.45), transparent 60%),
+              radial-gradient(900px 520px at 80% 10%, rgba(120,190,255,0.35), transparent 60%),
+              linear-gradient(180deg, var(--bg1), var(--bg0));
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-}
-
-/* =======================
-   Global Button Styles
-======================= */
-button {
-  background-color: #6b8e23; /* Verde olivo */
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 30px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-button:hover {
-  background-color: #556b2f;
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-}
-
-/* =======================
-   Hero Section
-======================= */
-.hero-section {
-  position: relative;
-  height: 100vh;
-  background: var(--hero-background-image) no-repeat center center/cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Overlay oscuro */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-content {
-  z-index: 2;
-  color: #fff;
-  text-align: center;
-  padding: 0 15px;
-}
-
-.hero-title {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-}
-
-.hero-subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.hero-button {
-  font-size: 1.2rem;
-  padding: 12px 30px;
-  border-radius: 50px;
-  background: #4facfe;
-  color: #fff;
-  border: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hero-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(79, 172, 254, 0.8);
-}
-
-/* =======================
-   About Section
-======================= */
-.about-section {
-  padding: 80px 0;
-  background: #fff;
-  color: #002d40;
-}
-
-.about-wrapper {
-  max-width: 1200px;
+.tara a{ color: inherit; }
+.tara-container{
+  width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding: 0 20px;
 }
 
-.about-image {
-  flex: 1;
-}
-
-.about-image img {
-  width: 300px; /* Imagen fija de 300px de ancho */
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  object-fit: cover;
-}
-
-.about-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-}
-
-.about-text h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.about-text p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-/* =======================
-   Cervezas Tarjetas Grandes & Uniformes
-======================= */
-
-.beers-section {
-  padding: 100px 20px;
-  background: linear-gradient(
-    to right,
-    #fceabb,
-    #f8b500
-  ); /* Fondo tipo dorado ámbar */
-  color: #2c2c2c;
-  text-align: center;
-  font-family: "Poppins", sans-serif;
-}
-
-.beers-section .section-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #1b1b1b;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* =========================
+   HERO (HD / crisp background)
+   ========================= */
+.tara-hero{
   position: relative;
-}
-
-.beer-description {
-  font-size: 1.3rem;
-  color: #333;
-  margin-bottom: 60px;
-  max-width: 800px;
-  margin: 0 auto 60px auto;
-  line-height: 1.6;
-}
-
-.beer-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-}
-
-.beer-card {
-  width: 360px;
-  height: 520px;
-  background: #ffffff;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-}
-
-.beer-image {
-  height: 220px;
-  width: 100%;
-  background-color: #f8f8f8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px; /* Espacio interior */
-  box-sizing: border-box;
-}
-
-.beer-image img {
-  max-height: 150px; /* Controla el tamaño de la chela */
-  width: auto;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.beer-card:hover .beer-image img {
-  transform: scale(1.05); /* Zoom suave al hacer hover */
-}
-
-.beer-content {
-  padding: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.beer-name {
-  font-size: 1.8rem;
-  color: #e65100;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-.beer-style {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-.beer-abv,
-.beer-ibu,
-.beer-hops {
-  font-size: 1rem;
-  color: #616161;
-  margin-bottom: 6px;
-  text-align: left;
-}
-
-/* Etiqueta diagonal */
-.beer-tag {
-  position: absolute;
-  top: 20px;
-  right: -30px;
-  background: #ff5722;
-  color: white;
-  padding: 6px 20px;
-  font-size: 0.9rem;
-  transform: rotate(45deg);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive ajustes */
-@media (max-width: 768px) {
-  .beer-card {
-    width: 100%;
-    height: auto;
-  }
-
-  .beers-section .section-title {
-    font-size: 2.4rem;
-  }
-
-  .beer-description {
-    font-size: 1.1rem;
-  }
-}
-
-/* =======================
-   Historia Section
-======================= */
-.history-section {
-  padding: 100px 20px;
-  background: #f8f8f8;
-  color: #002d40;
-  text-align: center;
-}
-
-.history-section .section-title {
-  font-size: 3rem;
-  margin-bottom: 50px;
-  text-transform: uppercase;
-}
-
-.timeline {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  padding-left: 30px;
-}
-
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: #4facfe;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 40px;
-  text-align: left;
-}
-
-.timeline-date {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #1abc9c;
-}
-
-.timeline-content {
-  background: #ffffff;
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* =======================
-   Awards Section
-======================= */
-.awards-section {
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #fdfbfb, #ebedee); /* Fondo sutil */
-  color: #333;
-  text-align: center;
-}
-
-.awards-section .section-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 60px;
-  color: #1abc9c;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.awards-grid {
+  min-height: 92vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-  justify-items: center;
-  align-items: stretch;
-}
-
-.award-card {
-  width: 100%; /* Asegura que ocupen el ancho disponible */
-  max-width: 400px; /* Aumenta el tamaño máximo */
-  height: 500px; /* Hace las cajas más grandes */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 30px;
-  border-radius: 20px;
-  background: white;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  cursor: pointer;
-}
-
-.award-card img {
-  width: 100%; /* Antes era 120px */
-  max-width: 300px; /* Hace la imagen más grande */
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.award-card h3 {
-  font-size: 2rem; /* Aumenta el tamaño del título */
-}
-
-.award-card p {
-  font-size: 1.3rem; /* Aumenta el tamaño del texto */
-  color: #444;
-}
-
-/* Para asegurarnos de que todas sean del mismo tamaño */
-.awards-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px; /* Espaciado entre tarjetas */
-}
-
-/* =======================
-   Tabla de Premios (Awards Table)
-======================= */
-.awards-table {
-  margin-top: 50px;
-  text-align: center;
-}
-
-.awards-table h3 {
-  font-size: 2rem;
-  color: #1abc9c;
-  margin-bottom: 15px;
-}
-
-.awards-table table {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  border-collapse: collapse;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   overflow: hidden;
+
+  /* Importante: evita que el navegador “suavice de más” el render */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-.awards-table th,
-.awards-table td {
-  padding: 15px;
-  border: 1px solid #ddd;
-  text-align: center;
-  font-size: 1.2rem;
+/* Fondo real del hero (en pseudo-elemento) */
+.tara-hero::before{
+  content:"";
+  position:absolute;
+  inset:-2px; /* evita bordes raros al escalar */
+  background-image: var(--hero-background-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* “crispness” */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0) scale(1.02); /* micro-escala para nitidez */
+  will-change: transform;
+
+  /* Un pelín de contraste para que se vea “HD” */
+  filter: saturate(1.08) contrast(1.06) brightness(1.02);
 }
 
-.awards-table th {
-  background: #1abc9c;
-  color: white;
-  text-transform: uppercase;
+/* Overlay: si está muy fuerte “lava” la foto. */
+.tara-hero__overlay{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    90deg,
+    var(--hero-overlay),
+    rgba(255,250,242,0.52)
+  );
 }
 
-.awards-table tr:hover {
-  background: rgba(26, 188, 156, 0.2);
-  transition: background 0.3s ease-in-out;
+/* Grid encima, súper sutil */
+.tara-hero__grid{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(15,27,42,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,27,42,0.10) 1px, transparent 1px);
+  background-size: 44px 44px;
+  opacity: 0.14;
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 
-/* =======================
-   Footer Section
-======================= */
-/* =======================
-   Footer Section
-======================= */
-.footer-section {
-  background: linear-gradient(145deg, #001b34, #001f3f);
-  padding: 60px 20px;
-  color: #fff;
-  font-size: 0.9rem;
-  text-align: center;
+/* Parallax suave SOLO desktop (mejora “wow”; en mobile se evita) */
+@media (min-width: 992px){
+  .tara-hero::before{
+    background-attachment: fixed;
+  }
 }
 
-.footer-section .footer-logo {
-  width: 120px;
-  margin-bottom: 20px;
+.tara-hero__inner{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 18px;
+  padding: 88px 0 54px;
+}
+@media (max-width: 920px){
+  .tara-hero__inner{ grid-template-columns: 1fr; padding-top: 72px; }
 }
 
-.footer-section p {
+.tara-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--border);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.tara-hero__copy h1{
+  margin: 12px 0 8px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.02;
+}
+.tara-hero__copy p{
   margin: 0;
-  line-height: 1.8;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 58ch;
 }
 
-.footer-line {
-  border-top: 1px solid #4facfe;
-  margin: 20px auto;
-  width: 60%;
+.tara-hero__ctas{
+  margin-top: 16px;
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.footer-emoji {
-  font-size: 1rem;
-  color: #4facfe;
-  font-weight: bold;
+.tara-btn{
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.72);
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  text-decoration:none;
+  font-weight: 800;
+  box-shadow: 0 10px 22px rgba(15,27,42,0.10);
+  transition: transform .12s ease, box-shadow .12s ease;
 }
-/* =======================
-   Logo Hover
-======================= */
-.logo-small {
-  height: 40px;
-  transition: transform 0.3s ease-in-out;
+.tara-btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 32px rgba(15,27,42,0.14); }
+.tara-btn--primary{
+  background: linear-gradient(90deg, var(--accentA), var(--accentB));
+  border-color: transparent;
+}
+.tara-btn--ghost{
+  background: rgba(255,255,255,0.55);
+}
+.tara-btn--full{ width: 100%; justify-content: center; }
+
+.tara-mini{
+  margin-top: 12px;
+  display:flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+.tara-mini i{ opacity: .8; }
+
+/* Glass card */
+.tara-hero__card{ align-self: center; }
+.tara-glassCard{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+.tara-glassCard__top{
+  display:flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-start;
+}
+.tara-glassCard__top h3{
+  margin:0;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.tara-glassCard__top p{
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.tara-pill{
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  display:inline-flex;
+  align-items:center;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.8);
+  font-weight: 900;
+  font-size: 12px;
 }
 
-.logo-small:hover {
-  transform: scale(1.1);
+.tara-glassCard__rows{
+  display:grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.tara-row{
+  display:flex;
+  gap: 10px;
+  align-items:flex-start;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid rgba(15,27,42,0.08);
+  background: rgba(255,255,255,0.55);
+}
+.tara-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  margin-top: 4px;
+}
+.tara-dot--a{ background: #ffd780; }
+.tara-dot--b{ background: #78beff; }
+.tara-muted{ color: var(--muted); font-size: 12.5px; }
+
+.tara-glassCard__ctas{
+  margin-top: 12px;
+  display:grid;
+  gap: 10px;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  .hero-subtitle {
-    font-size: 1.2rem;
-  }
-  .about-wrapper {
-    flex-direction: column;
-    text-align: center;
-  }
-  .about-text h2 {
-    font-size: 2.5rem;
-  }
-  .about-text p {
-    font-size: 1rem;
-  }
-  .beers-section {
-    padding: 80px 20px;
-  }
-  .beers-section .section-title {
-    font-size: 2rem;
-  }
-  .beer-card {
-    max-width: 200px;
-  }
-  .footer-section {
-    text-align: center;
-  }
-  .footer-line {
-    width: 80%;
-  }
-  .footer-logo {
-    width: 100px;
-  }
+/* Sections */
+.tara-sec{ padding: 64px 0; }
+.tara-sec--alt{
+  background: rgba(255,255,255,0.55);
+  border-top: 1px solid rgba(15,27,42,0.06);
+  border-bottom: 1px solid rgba(15,27,42,0.06);
 }
+.tara-secHead h2{
+  margin:0;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.tara-secHead p{ margin: 6px 0 0; color: var(--muted); }
+
+.tara-split{
+  display:grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 16px;
+}
+@media (max-width: 900px){
+  .tara-split{ grid-template-columns: 1fr; }
+}
+
+.tara-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+.tara-card--media{
+  padding: 0;
+  overflow:hidden;
+}
+.tara-card--media img{
+  width:100%;
+  height: 100%;
+  display:block;
+  object-fit: cover;
+  max-height: 360px;
+}
+
+.tara-card h2{ margin: 0 0 8px; font-weight: 900; }
+.tara-card p{ margin: 0; color: var(--muted); line-height: 1.6; }
+
+.tara-bullets{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 560px){
+  .tara-bullets{ grid-template-columns: 1fr; }
+}
+.tara-bullet{
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(15,27,42,0.08);
+  background: rgba(255,255,255,0.55);
+  font-weight: 800;
+}
+
+.tara-inline-cta{
+  margin-top: 12px;
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.tara-link{
+  font-weight: 900;
+  text-decoration:none;
+}
+.tara-link:hover{ text-decoration: underline; }
+
+/* Grid cards */
+.tara-grid3{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px){ .tara-grid3{ grid-template-columns: 1fr; } }
+.tara-miniCard{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.tara-miniCard h3{ margin:0; font-weight: 900; }
+.tara-miniCard p{ margin: 6px 0 10px; color: var(--muted); }
+
+/* CTA */
+.tara-sec--cta{
+  padding: 54px 0 72px;
+}
+.tara-cta{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, rgba(255,215,128,0.60), rgba(120,190,255,0.45));
+  border: 1px solid rgba(15,27,42,0.08);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.tara-cta h3{ margin:0; font-weight: 900; }
+.tara-cta p{ margin: 6px 0 0; color: rgba(15,27,42,0.72); font-weight: 700; }
+.tara-ctaBtns{ display:flex; gap: 10px; flex-wrap: wrap; }

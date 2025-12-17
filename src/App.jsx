@@ -1,203 +1,42 @@
-// App.jsx - HOME de Website de Tarabaña enero 2025
+// src/App.jsx
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/css/navbar.css";
-import "./assets/css/index.css";
-import "./assets/css/login.css";
-import "./assets/css/contact.css";
-import "./assets/css/taproom.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+import "./assets/css/navbar.css";
+import "./assets/css/index.css";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import heroBackgroundImage from "./assets/images/fv.jpg";
-import magma from "./assets/images/magma.jpg";
+import magmaImg from "./assets/images/magma.jpg";
 
-import pilsner from "./assets/images/magma.png";
-import doubleIPA from "./assets/images/magma.png";
-import hazyIPA from "./assets/images/magma.png";
-import westCoast from "./assets/images/magma.png";
-import sessionIPA from "./assets/images/magma.png";
-import blackIPA from "./assets/images/magma.png";
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from "react-router-dom";
 
-import aro from "./assets/images/aro-rojo.png";
-import ensenada from "./assets/images/ebf.png";
-import cervezaMexico from "./assets/images/cerveza-mexico.png";
-
-// Importar componentes y módulos de react-router
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
-
-// Componentes globales
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
-import Login from "./login";
+import Footer from "./components/Footer";
 import Contact from "./contact";
 import TapRoom from "./TapRoom";
-import TapList from "./TapList"; // Si el archivo TapList.jsx está en src/
+import TapList from "./TapList";
+import Login from "./login";
 
-// Logo (si lo necesitas en otras secciones)
-import Logo from "./assets/images/tara.png";
-
-// Array de cervezas
-const beers = [
-  {
-    name: "Sílice",
-    style: "Czech Pils",
-    abv: "5.1%",
-    ibu: "25",
-    image: pilsner,
-  },
-  {
-    name: "Magma",
-    style: "Doble IPA",
-    abv: "8.5%",
-    ibu: "55",
-    image: doubleIPA,
-  },
-  {
-    name: "Caliza",
-    style: "Hazy IPA",
-    abv: "5.2%",
-    ibu: "30",
-    hops: "Idaho 7, Centennial",
-    image: hazyIPA,
-  },
-  {
-    name: "Chula Vista",
-    style: "West Coast IPA",
-    abv: "5.0%",
-    ibu: "35",
-    hops: "Amarillo, Centennial",
-    image: westCoast,
-  },
-  {
-    name: "Brisa",
-    style: "Session IPA",
-    abv: "4.5%",
-    ibu: "25",
-    hops: "Simcoe, Chinook",
-    image: sessionIPA,
-  },
-  {
-    name: "Ónix",
-    style: "Black IPA",
-    abv: "6.8%",
-    ibu: "50",
-    hops: "Columbus, Chinook",
-    image: blackIPA,
-  },
-];
-
-// Componente para mostrar cada cerveza
-const BeerCard = ({ beer }) => (
-  <div className="beer-card" data-aos="fade-up">
-    <div className="beer-image">
-      <img src={beer.image} alt={beer.name} />
-    </div>
-    <div className="beer-content">
-      <h5 className="beer-name">{beer.name}</h5>
-      <p className="beer-style">
-        <strong>Estilo:</strong> {beer.style}
-      </p>
-      <p className="beer-abv">
-        <strong>ABV:</strong> {beer.abv}
-      </p>
-      <p className="beer-ibu">
-        <strong>IBU:</strong> {beer.ibu}
-      </p>
-      {beer.hops && (
-        <p className="beer-hops">
-          <strong>Lúpulos:</strong> {beer.hops}
-        </p>
-      )}
-    </div>
-  </div>
-);
-
-// Componente para scroll suave a la sección indicada por el hash
 const ScrollToHash = () => {
   const { hash } = useLocation();
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [hash]);
   return null;
 };
 
-const awardsData = [
-  { name: "Aro Rojo", location: "Monterrey", img: aro },
-  {
-    name: "Ensenada Beer Fest   ",
-    location: "Copa Cervecera del Pacífico Ensenada",
-    img: ensenada,
-  },
-  { name: "Cerveza México", location: "Ciudad de México", img: cervezaMexico },
-];
-
-const Awards = () => (
-  <section id="premios" className="awards-section">
-    <div className="container">
-      <h2 className="section-title">Premios y Competencias</h2>
-
-      <div className="awards-grid">
-        {awardsData.map((award, index) => (
-          <div className="award-card" key={index} data-aos="fade-up">
-            <img src={award.img} alt={award.name} />
-            <h3>{award.name}</h3>
-            <p>{award.location}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Nueva Tabla de Premios */}
-      <div className="awards-table">
-        <h3>Medallas Ganadas</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Año</th>
-              <th>Black IPA</th>
-              <th>Belgian Strong Ale</th>
-              <th>Czech Pilsner</th>
-              <th>Double IPA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2024</td>
-              <td>🥈 Plata</td>
-              <td>🥈 Plata</td>
-              <td>🥉 Bronce</td>
-              <td>🥈 Plata</td>
-            </tr>
-            <tr>
-              <td>2025</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-);
-
-// Componente Home con secciones integradas
-const Home = () => {
+function Home() {
   useEffect(() => {
-    AOS.init({ duration: 600, easing: "ease-out-cubic", once: true });
+    AOS.init({ duration: 650, easing: "ease-out-cubic", once: true });
+
+    // Se guarda el background como variable CSS
     document.documentElement.style.setProperty(
       "--hero-background-image",
       `url(${heroBackgroundImage})`
@@ -205,121 +44,164 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="tara">
       <Navbar />
 
-      {/* Hero Section */}
-      <header id="hero" className="hero-section">
-        <div className="hero-overlay">
-          <div className="hero-content text-center">
-            <h1 className="hero-title">Bienvenido a Tarabaña</h1>
-            <p className="hero-subtitle">Una Cerveza para todos.</p>
-            <button className="hero-button btn btn-light">Descubre más</button>
+      {/* HERO */}
+      <header id="hero" className="tara-hero">
+        {/* El fondo HD se dibuja vía ::before en CSS */}
+        <div className="tara-hero__overlay" />
+        <div className="tara-hero__grid" aria-hidden />
+
+        <div className="tara-container tara-hero__inner">
+          <div className="tara-hero__copy" data-aos="fade-up">
+            <span className="tara-kicker">Fábrica de Cervezas Tarabaña</span>
+            <h1>Cervecería independiente</h1>
+            <p>
+              Cerveza artesanal hecha en México. Hacemos Cerveza Balanceada y Lupulada para llevarte nuevas experiencias.
+              Ven al tap y descubre lo que está conectado hoy.
+            </p>
+
+            <div className="tara-hero__ctas">
+              <a className="tara-btn tara-btn--primary" href="#hoy">
+                Hoy en el tap
+              </a>
+              <Link className="tara-btn tara-btn--ghost" to="/taplist">
+                Ver Tap List
+              </Link>
+            </div>
+
+            <div className="tara-mini">
+              <span><i className="fa-solid fa-location-dot" /> Condesa · CDMX</span>
+              <span><i className="fa-solid fa-beer-mug-empty" /> Taproom</span>
+              <span><i className="fa-solid fa-bolt" /> Menú en vivo</span>
+            </div>
+          </div>
+
+          <div className="tara-hero__card" data-aos="fade-up" data-aos-delay="120">
+            <div className="tara-glassCard">
+              <div className="tara-glassCard__top">
+                <div>
+                  <h3>Tap List en vivo</h3>
+                  <p>Abre el menú digital y ve lo que está saliendo.</p>
+                </div>
+                <span className="tara-pill">Live</span>
+              </div>
+
+              <div className="tara-glassCard__rows">
+                <div className="tara-row">
+                  <span className="tara-dot tara-dot--a" />
+                  <div>
+                    <strong>Actualizado desde Untappd</strong>
+                    <div className="tara-muted">Sin fricción · siempre al día</div>
+                  </div>
+                </div>
+                <div className="tara-row">
+                  <span className="tara-dot tara-dot--b" />
+                  <div>
+                    <strong>Cae por una pinta</strong>
+                    <div className="tara-muted">Ambiente chill · buena música</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="tara-glassCard__ctas">
+                <Link className="tara-btn tara-btn--primary tara-btn--full" to="/taplist">
+                  Abrir Tap List
+                </Link>
+                <Link className="tara-btn tara-btn--ghost tara-btn--full" to="/TapRoom">
+                  Ver Taproom
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* About Section */}
-      <section id="about" className="about-section">
-        <div className="about-wrapper">
-          <div className="about-image">
-            <img src={magma} alt="Sobre Tarabaña" />
+      {/* HOY */}
+      <section id="hoy" className="tara-sec">
+        <div className="tara-container tara-split">
+          <div className="tara-card tara-card--media" data-aos="fade-up">
+            <img src={magmaImg} alt="Tarabaña" />
           </div>
-          <div className="about-text">
-            <h2>Acerca de Tarabaña</h2>
+
+          <div className="tara-card" data-aos="fade-up" data-aos-delay="80">
+            <h2>Qué hacemos</h2>
             <p>
-              Tarabaña es una experiencia sensorial donde cada sorbo de nuestra
-              cerveza artesanal cuenta una historia. Fusionamos el arte y el
-              sabor para crear momentos inolvidables.
+              Hacemos cerveza artesanal con un enfoque simple: Balance y lupulo.
             </p>
-            <p>
-              Nuestro compromiso es con la calidad y la innovación, ofreciendo
-              espacios únicos para disfrutar de la tradición cervecera.
-            </p>
+
+            <div className="tara-bullets">
+              <div className="tara-bullet"> Estilos clásicos + temporada</div>
+              <div className="tara-bullet"> Control y consistencia</div>
+              <div className="tara-bullet">📍 Taproom </div>
+              <div className="tara-bullet"> Colabs </div>
+            </div>
+
+            <div className="tara-inline-cta">
+              <Link className="tara-link" to="/taplist">Ver Tap List →</Link>
+              <Link className="tara-link" to="/contact">Eventos / Contacto →</Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Cervezas Section */}
-      <section id="cervezas" className="beers-section">
-        <div className="container">
-          <h2 className="section-title">Nuestras Cervezas de Línea</h2>
-          <p className="beer-description">
-            Explora nuestra selección de cervezas artesanales. Ven a nuestro Tap
-            en Condesa y conoce nuestras cervezas de línea y temporada.
-          </p>
-          <div className="beer-grid">
-            {beers.map((beer, index) => (
-              <BeerCard key={index} beer={beer} />
-            ))}
+      {/* CERBEZAS */}
+      <section id="cervezas" className="tara-sec tara-sec--alt">
+        <div className="tara-container">
+          <div className="tara-secHead" data-aos="fade-up">
+            <h2>Cervezas</h2>
+            <p>De línea y de temporada. Lo más confiable es el menú en vivo.</p>
           </div>
-        </div>
-      </section>
 
-      {/* Historia Section */}
-      <section id="historia" className="history-section">
-        <div className="container">
-          <h2 className="section-title">Nuestra Historia</h2>
-          <div className="timeline">
+          <div className="tara-grid3">
             {[
-              {
-                year: "2021",
-                title: "Fundación",
-                description:
-                  "Comenzamos con la visión de revolucionar la cerveza artesanal.",
-              },
-              {
-                year: "2022",
-                title: "Primeras Cervezas",
-                description:
-                  "Iniciamos la producción de nuestros primeros lotes.",
-              },
-              {
-                year: "2023",
-                title: "Redirección",
-                description:
-                  "Optimizamos nuestros procesos para enfocarnos en la calidad.",
-              },
-              {
-                year: "2024",
-                title: "Premios y Reconocimientos",
-                description:
-                  "Recibimos medallas y reconocimientos en competencias nacionales.",
-              },
-            ].map((event, index) => (
-              <div className="timeline-item" key={index} data-aos="fade-up">
-                <div className="timeline-date">{event.year}</div>
-                <div className="timeline-content">
-                  <h3>{event.title}</h3>
-                  <p>{event.description}</p>
-                </div>
+              { title: "Czech Pils", desc: "Limpia, crujiente, balanceada." },
+              { title: "IPA", desc: "Aromática y con buen amargor." },
+              { title: "Seasonals", desc: "Lotes especiales, por tiempo limitado." },
+            ].map((x) => (
+              <div className="tara-miniCard" key={x.title} data-aos="fade-up">
+                <h3>{x.title}</h3>
+                <p>{x.desc}</p>
+                <Link className="tara-link" to="/taplist">Ver en Tap List →</Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Medallas y Competencias Section */}
-      <Awards />
+      {/* CTA FINAL */}
+      <section className="tara-sec tara-sec--cta">
+        <div className="tara-container">
+          <div className="tara-cta" data-aos="fade-up">
+            <div>
+              <h3>¿Listo para caer?</h3>
+              <p>Revisa el menú digital y lánzate al tap.</p>
+            </div>
+            <div className="tara-ctaBtns">
+              <Link className="tara-btn tara-btn--primary" to="/taplist">Tap List</Link>
+              <Link className="tara-btn tara-btn--ghost" to="/TapRoom">Taproom</Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
   );
-};
+}
 
-const App = () => {
+export default function App() {
   return (
     <Router>
       <ScrollToHash />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/TapRoom" element={<TapRoom />} />
         <Route path="/taplist" element={<TapList />} />
+        <Route path="/TapRoom" element={<TapRoom />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
-};
-
-export default App;
+}

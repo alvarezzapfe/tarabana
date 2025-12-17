@@ -1,123 +1,100 @@
-import React from "react";
+// src/TapList.jsx
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
-import "./assets/css/TapList.css";
+import Footer from "./components/Footer"; // ✅ tu Footer aparte
+import "./assets/css/taplist.css";
 
-const beers = [
-  {
-    name: "TERCER OJO",
-    style: "Mexican Lager",
-    description: "Maíz morado + cacahuazintle. Colaboración con Thirdeye.",
-    ibu: 30,
-    abv: "4.5%",
-    half: "$50",
-    pint: "$80",
-  },
-  {
-    name: "TEZONTLE",
-    style: "American Pale Ale",
-    description: "Ámbar pálido, maltosa, caramelo suave.",
-    ibu: 40,
-    abv: "5.4%",
-    half: "$50",
-    pint: "$80",
-  },
-  {
-    name: "ARCILLA",
-    style: "Amber Ale",
-    description: "Caramelo marcado, frutos secos, rojiza.",
-    ibu: 45,
-    abv: "5.0%",
-    half: "$60",
-    pint: "$90",
-  },
-  {
-    name: "KAKAPO",
-    style: "New Zealand Pilsner",
-    description: "Lúpulos cítricos tropicales: lima, toronja.",
-    ibu: 40,
-    abv: "5.4%",
-    half: "$60",
-    pint: "$80",
-  },
-  {
-    name: "CALIZA",
-    style: "Hazy IPA",
-    description: "Turbia, frutal, premiada en Cocepa 2025.",
-    ibu: 55,
-    abv: "5.8%",
-    half: "$70",
-    pint: "$120",
-  },
-  {
-    name: "CHULA VISTA",
-    style: "West Coast IPA",
-    description: "Guayaba, melón. Oro Cocepa 2025.",
-    ibu: 60,
-    abv: "6.8%",
-    half: "$70",
-    pint: "$120",
-  },
-  {
-    name: "PARTENOPE",
-    style: "Triple IPA",
-    description: "Resinosa, floral, retrogusto dulce.",
-    ibu: 90,
-    abv: "10.2%",
-    half: "$70",
-    pint: "$120",
-  },
-  {
-    name: "SAN MATEO VIII",
-    style: "Belgian Trippel",
-    description: "Plátano y chicle. Oro en Cocepa 2025.",
-    ibu: 25,
-    abv: "7.5%",
-    half: "$70",
-    pint: "$120",
-  },
-];
+export default function TapList() {
+  const mountRef = useRef(null);
+  const [ready, setReady] = useState(false);
 
-const TapList = () => {
+  useEffect(() => {
+    if (!mountRef.current) return;
+
+    let container = document.getElementById("menu-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "menu-container";
+      mountRef.current.appendChild(container);
+    }
+
+    const run = () => {
+      if (window.PreloadEmbedMenu) {
+        window.PreloadEmbedMenu("menu-container", 49211, 174935);
+        setReady(true);
+      }
+    };
+
+    const existing = document.querySelector('script[data-untappd="embed"]');
+    if (!existing) {
+      const s = document.createElement("script");
+      s.src =
+        "https://embed-menu-preloader.untappdapi.com/embed-menu-preloader.min.js";
+      s.async = true;
+      s.dataset.untappd = "embed";
+      s.onload = run;
+      document.body.appendChild(s);
+    } else {
+      run();
+    }
+  }, []);
+
   return (
-    <div className="taplist-page">
+    <div className="app-container">
       <Navbar />
-      <div className="taplist-container">
-        <h1 className="title">🍺 CERVEZAS — EL CARACOL TAPROOM</h1>
-        <div className="table-wrapper">
-          <table className="beer-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>🍺 Cerveza</th>
-                <th>🏷️ Estilo</th>
-                <th>📝 Descripción</th>
-                <th>🌿 IBU</th>
-                <th>💥 ABV</th>
-                <th>🧉 ½ Pinta</th>
-                <th>🍻 Pinta</th>
-              </tr>
-            </thead>
-            <tbody>
-              {beers.map((beer, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{beer.name}</td>
-                  <td>{beer.style}</td>
-                  <td>{beer.description}</td>
-                  <td>{beer.ibu}</td>
-                  <td>{beer.abv}</td>
-                  <td>{beer.half}</td>
-                  <td>{beer.pint}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <Footer />
+
+      <main className="tl">
+        <div className="tl-bg" aria-hidden />
+        <div className="tl-grid" aria-hidden />
+
+        <section className="tl-wrap">
+          <header className="tl-head">
+            <div className="tl-title">
+              <h1>Tap List</h1>
+              <p>Menú en vivo · actualizado desde el tablero</p>
+            </div>
+
+            <div className="tl-source">
+              <span className="tl-pill">
+                <UntappdMark />
+                Untappd
+              </span>
+              <span className="tl-pill soft">Live</span>
+            </div>
+          </header>
+
+          <div className="tl-card">
+            {!ready && (
+              <div className="tl-loading" role="status" aria-live="polite">
+                <div className="tl-spinner" />
+                <div>
+                  <strong>Cargando menú…</strong>
+                  <div className="tl-muted">Puede tardar un momento.</div>
+                </div>
+              </div>
+            )}
+
+            <div ref={mountRef} className="tl-embed" />
+          </div>
+
+          <div className="tl-footnote">
+            * Este menú se muestra tal cual lo publica Untappd for Business.
+          </div>
+        </section>
+      </main>
+
+      <Footer /> {/* ✅ footer externo */}
     </div>
   );
-};
+}
 
-export default TapList;
+function UntappdMark() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M12 2l8 4v6c0 5.25-3.438 10.063-8 12c-4.563-1.938-8-6.75-8-12V6l8-4zm0 2.2L6 7v5c0 4.3 2.7 8.2 6 9.9c3.3-1.7 6-5.6 6-9.9V7l-6-2.8z"
+      />
+    </svg>
+  );
+}

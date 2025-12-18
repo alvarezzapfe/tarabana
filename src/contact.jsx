@@ -1,136 +1,200 @@
-// src/pages/Contact.jsx
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useMemo, useState } from "react";
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 import "./assets/css/contact.css";
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [status, setStatus] = useState("");
+const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+export default function Contact() {
+  const [form, setForm] = useState({ name: "", email: "", message: "", company: "" });
+  const [hp, setHp] = useState(""); // honeypot anti-bots
+  const [status, setStatus] = useState({ state: "idle", msg: "" }); // idle | loading | ok | error
 
-  const handleSubmit = (e) => {
+  const canSubmit = useMemo(() => {
+    return (
+      form.name.trim().length >= 2 &&
+      emailOk(form.email.trim()) &&
+      form.message.trim().length >= 10 &&
+      status.state !== "loading"
+    );
+  }, [form, status.state]);
+
+  const onChange = (e) => setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario (API, email, etc.)
-    console.log("Mensaje enviado:", formData);
-    setStatus("¡Mensaje enviado, gracias por contactarnos!");
-    setFormData({ name: "", email: "", message: "" });
+    if (hp) return; // bot
+    if (!canSubmit) return;
+
+    try {
+      setStatus({ state: "loading", msg: "Enviando..." });
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          company: form.company.trim(),
+          message: form.message.trim(),
+          source: "tarabana.mx",
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || "No se pudo enviar.");
+
+      setStatus({ state: "ok", msg: "Listo. Te contactamos pronto 🙌" });
+      setForm({ name: "", email: "", message: "", company: "" });
+    } catch (err) {
+      setStatus({
+        state: "error",
+        msg: err?.message || "Ocurrió un error. Intenta de nuevo.",
+      });
+    }
   };
 
   return (
-    <div className="contact-page">
+    <div className="t-contactPage">
       <Navbar />
-      <section className="contact-section py-5">
-        <div className="container">
-          <h1 className="contact-title text-center mb-4" data-aos="fade-up">
-            Contáctanos
-          </h1>
-          <p className="contact-subtitle text-center mb-5" data-aos="fade-up">
-            ¿Tienes alguna duda, comentario o sugerencia? Estamos aquí para
-            ayudarte.
-          </p>
-          <div className="row">
-            {/* Formulario de Contacto */}
-            <div className="col-md-6" data-aos="fade-right">
-              <form className="contact-form" onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Nombre
-                  </label>
+
+      <main className="t-contactWrap">
+        <div className="t-heroBg" aria-hidden />
+        <div className="t-heroGrid" aria-hidden />
+
+        <section className="t-contactCard">
+          <header className="t-contactHead">
+            <h1>Contacto</h1>
+            <p>
+              Fábrica de Cervezas Tarabaña · cervecería independiente. <br />
+              ¿Eventos, colaboraciones, distribuciones o prensa? Escríbenos.
+            </p>
+          </header>
+
+          <div className="t-contactGrid">
+            {/* FORM */}
+            <form className="t-form" onSubmit={onSubmit}>
+              <div className="t-row">
+                <div className="t-field">
+                  <label>Nombre</label>
                   <input
-                    type="text"
-                    className="form-control"
-                    id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    value={form.name}
+                    onChange={onChange}
                     placeholder="Tu nombre"
+                    autoComplete="name"
                     required
                   />
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Correo Electrónico
-                  </label>
+
+                <div className="t-field">
+                  <label>Email</label>
                   <input
-                    type="email"
-                    className="form-control"
-                    id="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    value={form.email}
+                    onChange={onChange}
                     placeholder="tuemail@ejemplo.com"
+                    autoComplete="email"
                     required
                   />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="message" className="form-label">
-                    Mensaje
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="message"
-                    name="message"
-                    rows="5"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Escribe tu mensaje aquí..."
-                    required
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary contact-submit"
-                >
-                  Enviar Mensaje
-                </button>
-                {status && (
-                  <div className="alert alert-success mt-3" role="alert">
-                    {status}
-                  </div>
-                )}
-              </form>
-            </div>
-            {/* Información de Contacto */}
-            <div className="col-md-6" data-aos="fade-left">
-              <div className="contact-info">
-                <h3>Información de Contacto</h3>
-                <p>
-                  <strong>Dirección:</strong> Tamaulipas 224, Ciudad de México
-                </p>
-                <p>
-                  <strong>Teléfono:</strong> +52 123 456 7890
-                </p>
-                <p>
-                  <strong>Email:</strong> contacto@tarabana.mx
-                </p>
-                <div className="map-responsive mt-4">
-                  <iframe
-                    title="Ubicación de Tarabaña"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.3339014412114!2d-99.1730251844462!3d19.421321586844707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fbb8f09e16e1%3A0x5d49ad396c3bd3e1!2sTamaulipas%20224!5e0!3m2!1ses-419!2smx!4v1637693963417!5m2!1ses-419!2smx"
-                    width="100%"
-                    height="250"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                  ></iframe>
                 </div>
               </div>
-            </div>
+
+              <div className="t-field">
+                <label>Empresa (opcional)</label>
+                <input
+                  name="company"
+                  value={form.company}
+                  onChange={onChange}
+                  placeholder="Marca / bar / distribuidora"
+                />
+              </div>
+
+              <div className="t-field">
+                <label>Mensaje</label>
+                <textarea
+                  name="message"
+                  rows={6}
+                  value={form.message}
+                  onChange={onChange}
+                  placeholder="Cuéntanos qué necesitas (mínimo 10 caracteres)..."
+                  required
+                />
+              </div>
+
+              {/* Honeypot hidden */}
+              <input
+                className="t-hp"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
+              <button className="t-submit" type="submit" disabled={!canSubmit}>
+                {status.state === "loading" ? "Enviando..." : "Enviar"}
+                <i className="fa-solid fa-paper-plane" />
+              </button>
+
+              {status.state !== "idle" && (
+                <div className={`t-alert ${status.state}`}>
+                  {status.msg}
+                </div>
+              )}
+
+              <div className="t-formFine">
+                Alternativa rápida: WhatsApp (botón abajo). Respuesta típica el mismo día.
+              </div>
+            </form>
+
+            {/* INFO */}
+            <aside className="t-info">
+              <div className="t-infoCard">
+                <h3>Taproom</h3>
+                <p>
+                  Tamaulipas 224, Condesa · CDMX
+                  <br />
+                  <span className="t-muted">Visítanos o arma un evento.</span>
+                </p>
+
+                <div className="t-pills">
+                  <a
+                    className="t-pill"
+                    href="https://www.instagram.com/tarabana.mx/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-instagram" /> Instagram
+                  </a>
+                  <a
+                    className="t-pill"
+                    href="https://www.facebook.com/tarabana.mx/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fab fa-facebook-f" /> Facebook
+                  </a>
+                  <a className="t-pill" href="/taplist">
+                    <i className="fa-solid fa-list" /> Tap List
+                  </a>
+                </div>
+              </div>
+
+              <div className="t-map">
+                <iframe
+                  title="Ubicación Tarabaña"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.3339014412114!2d-99.1730251844462!3d19.421321586844707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fbb8f09e16e1%3A0x5d49ad396c3bd3e1!2sTamaulipas%20224!5e0!3m2!1ses-419!2smx!4v1637693963417!5m2!1ses-419!2smx"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </aside>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
+
       <Footer />
     </div>
   );
-};
-
-export default Contact;
+}

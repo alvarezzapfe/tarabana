@@ -1,0 +1,189 @@
+/* ============================
+   WhatsApp Floating Widget
+   ============================ */
+
+/* CONTENEDOR PRINCIPAL */
+.wa-wrap {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 999999;
+  display: grid;
+  gap: 10px;
+}
+
+/* BOTÓN FLOTANTE */
+.wa-fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #2cff9c,
+    #17c964 45%,
+    #0a7a3b
+  );
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.wa-fab i {
+  font-size: 26px;
+}
+
+.wa-fab:hover {
+  transform: translateY(-2px);
+  filter: saturate(1.1);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+
+/* PANEL */
+.wa-panel {
+  width: 320px;
+  max-width: calc(100vw - 36px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(20, 60, 120, 0.18);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  transform: translateY(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.wa-panel.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* HEADER */
+.wa-head {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  gap: 10px;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 110, 255, 0.18),
+    rgba(130, 210, 255, 0.12)
+  );
+}
+
+.wa-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.wa-avatar i {
+  font-size: 20px;
+  color: #0a7a3b;
+}
+
+.wa-title {
+  font-weight: 800;
+  color: #0b2b4a;
+  line-height: 1.1;
+}
+
+.wa-sub {
+  font-size: 12px;
+  color: rgba(11, 43, 74, 0.75);
+}
+
+/* BOTÓN CERRAR */
+.wa-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(11, 43, 74, 0.9);
+  transition: background 0.15s ease;
+}
+
+.wa-close:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* BODY */
+.wa-body {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.wa-label {
+  font-size: 12px;
+  color: rgba(11, 43, 74, 0.8);
+  font-weight: 700;
+}
+
+.wa-textarea {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(11, 43, 74, 0.15);
+  background: rgba(255, 255, 255, 0.75);
+  padding: 10px 12px;
+  outline: none;
+  resize: none;
+  color: #0b2b4a;
+  font-size: 14px;
+}
+
+.wa-textarea::placeholder {
+  color: rgba(11, 43, 74, 0.45);
+}
+
+/* BOTÓN ENVIAR */
+.wa-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #0ea85b, #16c964);
+  box-shadow: 0 10px 24px rgba(22, 201, 100, 0.28);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.wa-send:hover {
+  transform: translateY(-1px);
+  filter: saturate(1.05);
+}
+
+/* TEXTO INFERIOR */
+.wa-mini {
+  font-size: 12px;
+  color: rgba(11, 43, 74, 0.75);
+  text-align: center;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .wa-wrap {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .wa-panel {
+    width: calc(100vw - 28px);
+  }
+}

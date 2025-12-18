@@ -3,6 +3,9 @@ import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+import WhatsAppWidget from "./components/WhatsAppWidget";
+
+
 import "./assets/css/navbar.css";
 import "./assets/css/index.css";
 
@@ -15,7 +18,7 @@ import magmaImg from "./assets/images/magma.jpg";
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 import Contact from "./contact";
 import TapRoom from "./TapRoom";
 import TapList from "./TapList";
@@ -196,6 +199,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToHash />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/taplist" element={<TapList />} />
@@ -203,6 +207,9 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+
+      {/* Floater global (siempre visible) */}
+      <WhatsAppWidget />
     </Router>
   );
 }

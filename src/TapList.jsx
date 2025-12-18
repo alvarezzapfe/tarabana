@@ -1,7 +1,7 @@
 // src/TapList.jsx
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./components/Navbar";
-import Footer from "./components/footer"; // ✅ tu Footer aparte
+import Footer from "./components/Footer"; // ✅ tu Footer aparte
 import "./assets/css/taplist.css";
 
 export default function TapList() {

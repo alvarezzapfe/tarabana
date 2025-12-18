@@ -90,4 +90,4 @@ const TapRoom = () => {
   );
 };
 
-export default taproom;
+export default TapRoom;

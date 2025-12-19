@@ -6,33 +6,20 @@ const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim())
 const clamp = (s, max) => String(s || "").trim().slice(0, max);
 
 export default async function handler(req, res) {
-  // --- CORS básico (no estorba si todo es mismo dominio) ---
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Preflight (MUY común que sea la causa del 405 si hay algo que lo dispara)
-  if (req.method === "OPTIONS") {
-    return res.status(204).end();
-  }
-
-  // Solo POST
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed", method: req.method });
-  }
+  if (req.method === "OPTIONS") return res.status(204).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed", method: req.method });
 
   try {
-    // Validar env vars
-    const apiKey = process.env.RESEND_API_KEY;
-    const to = process.env.CONTACT_TO_EMAIL;
-    const from = process.env.CONTACT_FROM_EMAIL;
+    const missing = [];
+    if (!process.env.RESEND_API_KEY) missing.push("RESEND_API_KEY");
+    if (!process.env.CONTACT_TO_EMAIL) missing.push("CONTACT_TO_EMAIL");
+    if (!process.env.CONTACT_FROM_EMAIL) missing.push("CONTACT_FROM_EMAIL");
+    if (missing.length) return res.status(500).json({ error: "Missing env vars", missing });
 
-    if (!apiKey) return res.status(500).json({ error: "Falta RESEND_API_KEY" });
-    if (!to || !from) {
-      return res.status(500).json({ error: "Faltan CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL" });
-    }
-
-    // Leer body (Vercel lo parsea si viene JSON con header correcto)
     const { name, email, company, message, source } = req.body || {};
 
     const cleanName = clamp(name, 120);
@@ -44,38 +31,36 @@ export default async function handler(req, res) {
     if (!cleanName || !cleanEmail || !cleanMessage) {
       return res.status(400).json({ error: "Campos requeridos faltantes" });
     }
-    if (!emailOk(cleanEmail)) {
-      return res.status(400).json({ error: "Email inválido" });
-    }
-    if (cleanMessage.length < 10) {
-      return res.status(400).json({ error: "Mensaje muy corto (mínimo 10 caracteres)" });
-    }
+    if (!emailOk(cleanEmail)) return res.status(400).json({ error: "Email inválido" });
+    if (cleanMessage.length < 10) return res.status(400).json({ error: "Mensaje muy corto (mín. 10)" });
+
+    const to = process.env.CONTACT_TO_EMAIL;   // <- aquí llega (luis@tarabana.mx)
+    const from = process.env.CONTACT_FROM_EMAIL;
 
     const subject = `Nuevo contacto Tarabaña — ${cleanName}`;
-    const text = [
-      `Nuevo contacto desde ${cleanSource}`,
-      "",
-      `Nombre: ${cleanName}`,
-      `Email: ${cleanEmail}`,
-      `Empresa: ${cleanCompany || "-"}`,
-      "",
-      "Mensaje:",
-      cleanMessage,
-      "",
-    ].join("\n");
+    const text = `Nuevo contacto desde ${cleanSource}
+
+Nombre: ${cleanName}
+Email: ${cleanEmail}
+Empresa: ${cleanCompany || "-"}
+Mensaje:
+${cleanMessage}
+`;
 
     const out = await resend.emails.send({
       from,
       to,
       subject,
       text,
-      // para que al “Reply” se vaya al cliente
       replyTo: cleanEmail,
     });
 
+    if (out?.error) {
+      return res.status(500).json({ error: "Resend error", details: out.error?.message || out.error });
+    }
+
     return res.status(200).json({ ok: true, id: out?.data?.id || null });
   } catch (err) {
-    console.error("CONTACT_API_ERROR:", err);
-    return res.status(500).json({ error: "Error enviando correo" });
+    return res.status(500).json({ error: "Unhandled server error", details: err?.message || String(err) });
   }
 }

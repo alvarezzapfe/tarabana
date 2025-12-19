@@ -5,6 +5,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import WhatsAppWidget from "./components/WhatsAppWidget";
 
+import Shop from "./shop.jsx";
+
+import "./assets/css/shop.css";
 
 import "./assets/css/navbar.css";
 import "./assets/css/index.css";
@@ -206,6 +209,7 @@ export default function App() {
         <Route path="/TapRoom" element={<TapRoom />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
 
       {/* Floater global (siempre visible) */}

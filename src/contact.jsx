@@ -11,20 +11,36 @@ export default function Contact() {
   const [status, setStatus] = useState({ state: "idle", msg: "" }); // idle | loading | ok | error
 
   const canSubmit = useMemo(() => {
-    return (
-      form.name.trim().length >= 2 &&
-      emailOk(form.email.trim()) &&
-      form.message.trim().length >= 10 &&
-      status.state !== "loading"
-    );
+    const nameOk = form.name.trim().length >= 2;
+    const mailOk = emailOk(form.email.trim());
+    const msgOk = form.message.trim().length >= 10;
+    return nameOk && mailOk && msgOk && status.state !== "loading";
   }, [form, status.state]);
 
   const onChange = (e) => setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (hp) return; // bot
-    if (!canSubmit) return;
+
+    // Debug rápido (si quieres): descomenta 1 vez para ver que sí entra
+    // console.log("SUBMIT", { form, hp, canSubmit, status: status.state });
+
+    if (status.state === "loading") return;
+
+    // Honeypot: si se llenó, no falles silencioso; responde ok
+    if (hp.trim()) {
+      setStatus({ state: "ok", msg: "Listo. Te contactamos pronto 🙌" });
+      setForm({ name: "", email: "", message: "", company: "" });
+      return;
+    }
+
+    if (!canSubmit) {
+      setStatus({
+        state: "error",
+        msg: "Completa: nombre (>=2), email válido, mensaje (>=10).",
+      });
+      return;
+    }
 
     try {
       setStatus({ state: "loading", msg: "Enviando..." });
@@ -41,8 +57,12 @@ export default function Contact() {
         }),
       });
 
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data?.error || "No se pudo enviar.");
+      const contentType = res.headers.get("content-type") || "";
+      const payload = contentType.includes("application/json")
+        ? await res.json().catch(() => ({}))
+        : { error: await res.text().catch(() => "") };
+
+      if (!res.ok) throw new Error(payload?.error || `No se pudo enviar (HTTP ${res.status}).`);
 
       setStatus({ state: "ok", msg: "Listo. Te contactamos pronto 🙌" });
       setForm({ name: "", email: "", message: "", company: "" });
@@ -72,8 +92,7 @@ export default function Contact() {
           </header>
 
           <div className="t-contactGrid">
-            {/* FORM */}
-            <form className="t-form" onSubmit={onSubmit}>
+            <form className="t-form" onSubmit={onSubmit} noValidate>
               <div className="t-row">
                 <div className="t-field">
                   <label>Nombre</label>
@@ -90,6 +109,7 @@ export default function Contact() {
                 <div className="t-field">
                   <label>Email</label>
                   <input
+                    type="email"
                     name="email"
                     value={form.email}
                     onChange={onChange}
@@ -107,6 +127,7 @@ export default function Contact() {
                   value={form.company}
                   onChange={onChange}
                   placeholder="Marca / bar / distribuidora"
+                  autoComplete="organization"
                 />
               </div>
 
@@ -122,24 +143,36 @@ export default function Contact() {
                 />
               </div>
 
-              {/* Honeypot hidden */}
+              {/* Honeypot real (oculto fuera de pantalla, no display:none) */}
               <input
-                className="t-hp"
+                name="website"
                 value={hp}
                 onChange={(e) => setHp(e.target.value)}
                 tabIndex={-1}
                 autoComplete="off"
                 aria-hidden="true"
+                className="t-hp"
               />
 
-              <button className="t-submit" type="submit" disabled={!canSubmit}>
+              <button
+                className={`t-submit ${!canSubmit ? "is-disabled" : ""}`}
+                type="submit"
+                aria-disabled={!canSubmit}
+                title={!canSubmit ? "Completa los campos para enviar" : ""}
+              >
                 {status.state === "loading" ? "Enviando..." : "Enviar"}
                 <i className="fa-solid fa-paper-plane" />
               </button>
 
               {status.state !== "idle" && (
-                <div className={`t-alert ${status.state}`}>
+                <div className={`t-alert ${status.state}`} role="status" aria-live="polite">
                   {status.msg}
+                </div>
+              )}
+
+              {!canSubmit && status.state === "idle" && (
+                <div className="t-formFine">
+                  Para enviar: nombre (>=2), email válido, mensaje (>=10).
                 </div>
               )}
 
@@ -148,7 +181,7 @@ export default function Contact() {
               </div>
             </form>
 
-            {/* INFO */}
+            {/* INFO igual que lo tuyo */}
             <aside className="t-info">
               <div className="t-infoCard">
                 <h3>Taproom</h3>

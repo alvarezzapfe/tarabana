@@ -134,7 +134,23 @@
   color: rgba(11,43,74,.7);
 }
 
-.t-hp{ display: none; }
+/* Reemplaza tu .t-hp actual */
+.t-hp{
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* “disabled” visual pero clickeable (aria-disabled) */
+.t-submit.is-disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
 
 .t-info{ display: grid; gap: 12px; }
 

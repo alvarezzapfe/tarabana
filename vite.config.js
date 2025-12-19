@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "./", // Importante para que los archivos se sirvan correctamente en Vercel
+  // base: "/", // opcional, por default ya es "/"
   build: {
-    outDir: "dist", // La carpeta donde se guarda la compilación
-    assetsDir: "assets", // Para evitar conflictos con los assets
+    outDir: "dist",
+    assetsDir: "assets",
   },
 });

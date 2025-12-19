@@ -7,7 +7,7 @@ import WhatsAppWidget from "./components/WhatsAppWidget";
 
 import Shop from "./shop.jsx";
 
-import "./assets/css/shop.css";
+
 
 import "./assets/css/navbar.css";
 import "./assets/css/index.css";

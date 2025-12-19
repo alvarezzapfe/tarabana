@@ -172,7 +172,9 @@ export default function Contact() {
 
               {!canSubmit && status.state === "idle" && (
                 <div className="t-formFine">
-                  Para enviar: nombre (>=2), email válido, mensaje (>=10).
+                  Para enviar: nombre (≥ 2), email válido, mensaje (≥ 10).
+
+
                 </div>
               )}
 

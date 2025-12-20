@@ -1,35 +1,10 @@
-// src/shop.js
+// src/shopData.js
 export const PRODUCTS = [
-  {
-    id: "pet20",
-    name: "Barril PET 20L",
-    desc: "Ideal para eventos. Ligero y práctico.",
-    tag: "20 litros",
-  },
-  {
-    id: "steel20",
-    name: "Barril Acero 20L",
-    desc: "Para quien se pone serio. Flow profesional.",
-    tag: "20 litros",
-  },
-  {
-    id: "mix24",
-    name: "Caja surtida (24)",
-    desc: "Mix de estilos. Perfecta para probar.",
-    tag: "24 pack",
-  },
-  {
-    id: "line24",
-    name: "Caja chela de línea (24)",
-    desc: "Tu favorita en modo abastecimiento.",
-    tag: "24 pack",
-  },
-  {
-    id: "hoodie",
-    name: "Sudadera Tarabaña",
-    desc: "Merch oficial. Edición limitada.",
-    tag: "Merch",
-  },
+  { id: "pet20",   name: "Barril PET 20L",            desc: "Ideal para eventos. Ligero y práctico.", tag: "20 litros" },
+  { id: "steel20", name: "Barril Acero 20L",          desc: "Flow profesional. Para bares y eventos.", tag: "20 litros" },
+  { id: "mix24",   name: "Caja surtida (24)",         desc: "Mix de estilos. Para probar todo.",       tag: "24 pack"  },
+  { id: "line24",  name: "Caja chela de línea (24)",  desc: "Tu favorita en modo abastecimiento.",      tag: "24 pack"  },
+  { id: "hoodie",  name: "Sudadera Tarabaña",         desc: "Merch oficial. Edición limitada.",         tag: "Merch"    },
 ];
 
 export const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v || "").trim());

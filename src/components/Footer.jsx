@@ -2,7 +2,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/images/tara.png";
-import "../assets/css/footer.css"; // <-- asegúrate de tenerlo
+import Ema from "../assets/images/ema.png";
+import "../assets/css/footer.css";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -13,10 +14,19 @@ const Footer = () => {
       <div className="t-footerGrid" aria-hidden />
 
       <div className="container t-footerInner">
+        {/* EMA (arriba, centrada) */}
+        <div className="t-footerEmaWrap">
+          <img
+            src={Ema}
+            alt="EMA"
+            className="t-footerEma"
+            loading="lazy"
+          />
+        </div>
+
         {/* Brand row */}
         <div className="t-footerBrandRow">
           <div className="t-footerBrand">
-            {/* ✅ contenedor fijo para dominar el tamaño */}
             <div className="t-footerLogoWrap" aria-hidden="true">
               <img src={Logo} alt="Tarabaña" className="t-footerLogo" />
             </div>
@@ -90,6 +100,8 @@ const Footer = () => {
               <li><a href="/#hoy">Hoy en el tap</a></li>
               <li><a href="/#cervezas">Cervezas</a></li>
               <li><Link to="/taplist">Tap List</Link></li>
+              <li><Link to="/shop">Compra</Link></li>
+              <li><Link to="/about">Acerca de</Link></li>
             </ul>
           </div>
 
@@ -112,8 +124,15 @@ const Footer = () => {
 
           <div className="t-footerCol t-footerCTA">
             <div className="t-footerCard">
-              <h5>¿Vienes hoy?</h5>
-              <p>Checa lo que está saliendo y cae por una pinta.</p>
+              <div className="t-footerCardTop">
+                <div>
+                  <h5>¿Vienes hoy?</h5>
+                  <p>Checa lo que está saliendo y cae por una pinta.</p>
+                </div>
+               まして
+                <span className="t-footerChip">Live</span>
+              </div>
+
               <div className="t-footerBtns">
                 <a className="t-footBtn t-footBtnPrimary" href="/#hoy">
                   Hoy en el tap <i className="fa-solid fa-arrow-right" />
@@ -143,13 +162,12 @@ const Footer = () => {
           <div className="t-footerLine" />
           <div className="t-footerBottomRow">
             <p className="t-footerLegal">
-              © {year} Compañía Cervecera Tierra Mojada S.A.P.I. de C.V. Todos los
-              derechos reservados.
+              © {year} Compañía Cervecera Tierra Mojada S.A.P.I. de C.V. Todos los derechos reservados.
             </p>
             <div className="t-footerMiniLinks">
               <Link to="/contact">Contacto</Link>
               <span className="t-dot">•</span>
-              <a href="/#about">Quiénes somos</a>
+              <Link to="/about">Quiénes somos</Link>
             </div>
           </div>
         </div>

@@ -1,15 +1,20 @@
-/* Navbar moderno: mantiene tu paleta (azul oscuro + teal) pero más premium */
+/* ===========================
+   NAVBAR PREMIUM (Tarabaña)
+   Paleta: azul oscuro + acento teal
+   =========================== */
+
+/* Root navbar */
 .custom-navbar {
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 9999; /* único z-index, sin duplicados */
   background: linear-gradient(45deg, #2c3e50, #34495e);
   padding: 0.75rem 1.25rem;
   transition: background 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 
-/* En scroll: efecto glass + blur */
+/* En scroll: glass + blur */
 .custom-navbar.is-scrolled {
   background: linear-gradient(45deg, rgba(44, 62, 80, 0.86), rgba(52, 73, 94, 0.86));
   backdrop-filter: blur(10px);
@@ -22,20 +27,21 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  z-index: 10000; /* por si overlays raros */
 }
 
-/* LOGO más grande */
+/* LOGO grande */
 .logo-big {
-  height: 64px;              /* antes 45px */
+  height: 64px;
   width: auto;
   transition: transform 0.25s ease, filter 0.25s ease;
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
+  will-change: transform;
 }
 
 @media (max-width: 992px) {
   .logo-big { height: 58px; }
 }
-
 @media (max-width: 420px) {
   .logo-big { height: 52px; }
 }
@@ -44,7 +50,7 @@
   transform: translateY(-1px) scale(1.03);
 }
 
-/* Glow sutil detrás del logo (lujo) */
+/* Glow detrás del logo */
 .brand-glow {
   position: absolute;
   inset: -18px -22px;
@@ -73,6 +79,7 @@
   padding: 0.6rem 0.75rem !important;
   border-radius: 12px;
   overflow: hidden;
+  will-change: transform;
 }
 
 .t-link::after {
@@ -82,7 +89,12 @@
   right: 12px;
   bottom: 8px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(26,188,156,0), rgba(26,188,156,0.95), rgba(26,188,156,0));
+  background: linear-gradient(
+    90deg,
+    rgba(26,188,156,0),
+    rgba(26,188,156,0.95),
+    rgba(26,188,156,0)
+  );
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.22s ease;
@@ -92,18 +104,14 @@
 .t-link:hover {
   color: #1abc9c;
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .t-link:hover::after {
   transform: scaleX(1);
 }
 
-/* Hover suave (glass pill) */
-.t-link:hover {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-/* Toggler moderno (hamburguesa animada) */
+/* Toggler moderno */
 .custom-navbar .navbar-toggler {
   border: none;
 }
@@ -116,6 +124,7 @@
   border: 1px solid rgba(255, 255, 255, 0.10);
   display: grid;
   place-items: center;
+  z-index: 10000;
 }
 
 .t-burger {
@@ -142,49 +151,17 @@
 .t-burger::before { top: -7px; }
 .t-burger::after  { top:  7px; }
 
-.t-toggler.is-open .t-burger {
-  background: transparent;
-}
+.t-toggler.is-open .t-burger { background: transparent; }
+.t-toggler.is-open .t-burger::before { top: 0; transform: rotate(45deg); }
+.t-toggler.is-open .t-burger::after  { top: 0; transform: rotate(-45deg); }
 
-.t-toggler.is-open .t-burger::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.t-toggler.is-open .t-burger::after {
-  top: 0;
-  transform: rotate(-45deg);
-}
-
-/* Menu */
+/* UL */
 .nav-ul {
   align-items: center;
   gap: 2px;
 }
 
-/* En mobile: el collapse se ve como panel glass */
-@media (max-width: 991px) {
-  .custom-navbar .navbar-collapse {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 16px;
-    background: rgba(10, 20, 35, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.25);
-    transform-origin: top;
-    animation: tDrop 180ms ease both;
-  }
-
-  @keyframes tDrop {
-    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .custom-navbar .nav-link { margin-right: 0; }
-}
-
-/* Login button (mantiene tu estilo pero más premium) */
+/* Login button */
 .custom-navbar .btn-outline-light.t-loginBtn {
   border-color: rgba(26, 188, 156, 0.9);
   color: rgba(26, 188, 156, 0.95);
@@ -192,6 +169,7 @@
   padding: 10px 14px;
   font-weight: 800;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  will-change: transform;
 }
 
 .custom-navbar .btn-outline-light.t-loginBtn:hover {
@@ -201,7 +179,7 @@
   box-shadow: 0 14px 28px rgba(26, 188, 156, 0.18);
 }
 
-/* CTA Marrano (lujo): botón comprar con shimmer */
+/* CTA premium */
 .t-cta {
   position: relative;
   display: inline-flex;
@@ -218,6 +196,7 @@
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
   transition: transform 0.18s ease, filter 0.18s ease;
   overflow: hidden;
+  will-change: transform;
 }
 
 .t-cta:hover {
@@ -226,7 +205,6 @@
 }
 
 .t-ctaShine {
-  content: "";
   position: absolute;
   top: -40%;
   left: -30%;
@@ -245,9 +223,56 @@
   100% { transform: translateX(260%) rotate(20deg); }
 }
 
-/* Espaciado CTA en mobile */
+/* CTA spacing */
 .nav-cta { margin-left: 6px; }
-@media (max-width: 991px) {
+
+/* ===========================
+   MOBILE: panel + overlay + clicks
+   =========================== */
+
+/* Overlay detrás del menú */
+.t-navOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.18);
+  backdrop-filter: blur(6px);
+  z-index: 9998;
+}
+
+/* Asegura panel encima */
+.custom-navbar .navbar-collapse {
+  position: relative;
+  z-index: 9999;
+}
+
+/* En mobile: SOLO cuando está abierto (show) se pinta como panel */
+@media (max-width: 991.98px) {
+  .custom-navbar .navbar-collapse.show {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(44, 62, 80, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 18px 60px rgba(0,0,0,.28);
+    transform-origin: top;
+    animation: tDrop 180ms ease both;
+
+    /* por si hay muchos items */
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @keyframes tDrop {
+    from { opacity: 0; transform: translateY(-8px) scale(0.985); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .custom-navbar .nav-link { margin-right: 0; }
+
+  .custom-navbar .nav-item { margin: 6px 0; }
+
   .nav-cta { width: 100%; margin-left: 0; }
   .t-cta, .t-loginBtn { width: 100%; margin-top: 8px; }
 }

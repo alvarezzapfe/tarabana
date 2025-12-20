@@ -10,14 +10,15 @@ const Navbar = () => {
   const location = useLocation();
 
   const toggleMenu = () => setMenuOpen((s) => !s);
-  const handleNavClick = () => setMenuOpen(false);
+  const closeMenu = () => setMenuOpen(false);
 
-  // Cierra menú cuando cambia ruta
+  // Cierra menú cuando cambia ruta/hash
   useEffect(() => {
-    setMenuOpen(false);
+    closeMenu();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname, location.hash]);
 
-  // Efecto sticky + blur al hacer scroll
+  // Sticky/blur cuando scrollea
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -25,14 +26,38 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Bloquea scroll del body en mobile cuando menú abierto
+  useEffect(() => {
+    if (!menuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  // Cierra con ESC
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") closeMenu();
+    };
+    if (menuOpen) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   const navClass = useMemo(() => {
     return `navbar navbar-expand-lg navbar-dark custom-navbar ${scrolled ? "is-scrolled" : ""}`;
   }, [scrolled]);
 
   return (
     <nav className={navClass}>
+      {/* Overlay para mobile: arregla clicks + cierra menú al click fuera */}
+      {menuOpen && <div className="t-navOverlay" onClick={closeMenu} aria-hidden />}
+
       <div className="container">
-        <Link to="/" className="navbar-brand brand-wrap" onClick={handleNavClick}>
+        <Link to="/" className="navbar-brand brand-wrap" onClick={closeMenu}>
           <img src={Logo} alt="Logotipo de Tarabaña" className="logo-big" />
           <span className="brand-glow" aria-hidden />
         </Link>
@@ -50,35 +75,37 @@ const Navbar = () => {
         <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
           <ul className="navbar-nav ms-auto nav-ul">
             <li className="nav-item">
-              <Link to="/#hero" className={`nav-link t-link`} onClick={handleNavClick}>
+              <Link to="/#hero" className="nav-link t-link" onClick={closeMenu}>
                 Inicio
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link to="/#about" className="nav-link t-link" onClick={handleNavClick}>
+              <Link to="/about" className="nav-link t-link" onClick={closeMenu}>
                 Acerca de
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link to="/#cervezas" className="nav-link t-link" onClick={handleNavClick}>
+              <Link to="/#cervezas" className="nav-link t-link" onClick={closeMenu}>
                 Cervezas de Línea
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link to="/TapRoom" className="nav-link t-link" onClick={handleNavClick}>
+              <Link to="/TapRoom" className="nav-link t-link" onClick={closeMenu}>
                 Tap Room
               </Link>
             </li>
 
-            {/* NUEVO: Compra en línea */}
             <li className="nav-item">
-              <Link to="/shop" className="nav-link t-link" onClick={handleNavClick}>
+              <Link to="/shop" className="nav-link t-link" onClick={closeMenu}>
                 Compra en línea
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link to="/contact" className="nav-link t-link" onClick={handleNavClick}>
+              <Link to="/contact" className="nav-link t-link" onClick={closeMenu}>
                 Contacto
               </Link>
             </li>
@@ -87,22 +114,18 @@ const Navbar = () => {
               <Link
                 to="/login"
                 className="btn btn-outline-light ms-lg-3 t-loginBtn"
-                onClick={handleNavClick}
+                onClick={closeMenu}
               >
                 Login
               </Link>
             </li>
 
-            {/* CTA Marrano (lujo): botón premium */}
+            {/* CTA Marrano (lujo) - sin recargar página */}
             <li className="nav-item nav-cta">
-              <a
-                href="https://www.tarabana.mx/shop"
-                className="t-cta"
-                onClick={handleNavClick}
-              >
+              <Link to="/shop" className="t-cta" onClick={closeMenu}>
                 Comprar ahora
                 <span className="t-ctaShine" aria-hidden />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

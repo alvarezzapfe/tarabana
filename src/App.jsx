@@ -7,6 +7,7 @@ import WhatsAppWidget from "./components/WhatsAppWidget";
 
 import Shop from "./shop.jsx";
 
+import About from "./about";
 
 
 import "./assets/css/navbar.css";
@@ -210,6 +211,8 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/about" element={<About />} />
+
       </Routes>
 
       {/* Floater global (siempre visible) */}

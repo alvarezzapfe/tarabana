@@ -24,7 +24,8 @@ export default function About() {
     {
       year: "2024–2025",
       title: "Diferenciación por calidad",
-      desc: "Elevamos estándares: control, consistencia y ejecución. Nos obsesionamos con la experiencia en cada pinta.",
+      desc:
+        "Elevamos estándares: control, consistencia y ejecución. Nos obsesionamos con la experiencia en cada pinta.",
       tag: "Calidad",
     },
     {
@@ -50,9 +51,11 @@ export default function About() {
                 <span className="t-dot" aria-hidden />
                 Historia · 3 pasos
               </div>
+
               <h1>
                 Acerca de <span className="t-shineText">Tarabaña</span>
               </h1>
+
               <p>
                 Un camino simple: empezar pequeño, mejorar obsesivamente, y escalar con
                 calidad.

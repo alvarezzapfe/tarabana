@@ -155,28 +155,100 @@ function Home() {
       </section>
 
       {/* CERBEZAS */}
-      <section id="cervezas" className="tara-sec tara-sec--alt">
-        <div className="tara-container">
-          <div className="tara-secHead" data-aos="fade-up">
-            <h2>Cervezas</h2>
-            <p>De línea y de temporada. Lo más confiable es el menú en vivo.</p>
-          </div>
+      {/* CERVEZAS DE LÍNEA (PRO) */}
+<section id="cervezas" className="tara-sec tara-sec--alt">
+  <div className="tara-container">
+    <div className="tara-secHead" data-aos="fade-up">
+      <h2>Cervezas de línea</h2>
+      <p>
+        Nuestra iconica <strong>MAGMA</strong> + lineup completo. (La referencia
+        más confiable siempre es el Tap List en vivo.)
+      </p>
+    </div>
 
-          <div className="tara-grid3">
-            {[
-              { title: "Czech Pils", desc: "Limpia, crujiente, balanceada." },
-              { title: "IPA", desc: "Aromática y con buen amargor." },
-              { title: "Seasonals", desc: "Lotes especiales, por tiempo limitado." },
-            ].map((x) => (
-              <div className="tara-miniCard" key={x.title} data-aos="fade-up">
-                <h3>{x.title}</h3>
-                <p>{x.desc}</p>
-                <Link className="tara-link" to="/taplist">Ver en Tap List →</Link>
-              </div>
-            ))}
+    {/* MAGMA HERO (arriba al centro) */}
+    <div className="tara-lineupHero" data-aos="zoom-in">
+      <button
+        type="button"
+        className="tara-magmaHero"
+        onClick={() => {
+          // trigger spin (click)
+          const el = document.getElementById("taraMagmaCan");
+          if (!el) return;
+          el.classList.remove("is-spinning");
+          // reflow para reiniciar animación
+          void el.offsetWidth;
+          el.classList.add("is-spinning");
+        }}
+        aria-label="Ver Magma"
+      >
+        <div className="tara-magmaHero__left">
+          <span className="tara-chip">Iconica</span>
+          <h3>MAGMA</h3>
+          <p>Doble IPA (Imperial IPA) · intensa · lupulada · peligrosa</p>
+          <div className="tara-magmaHint">
+            Tip: pásale el mouse / tap para girar
           </div>
         </div>
-      </section>
+
+        <div className="tara-magmaHero__right">
+          <img
+            id="taraMagmaCan"
+            className="tara-magmaCan"
+            src={magmaImg}
+            alt="Magma - Tarabaña"
+            onMouseEnter={(e) => {
+              e.currentTarget.classList.remove("is-spinning");
+              void e.currentTarget.offsetWidth;
+              e.currentTarget.classList.add("is-spinning");
+            }}
+          />
+          <div className="tara-magmaGlow" aria-hidden />
+        </div>
+      </button>
+    </div>
+
+    {/* GRID 10 boxes */}
+    <div className="tara-lineupGrid">
+      {[
+        { name: "Caliza", style: "Hazy IPA" },
+        { name: "Tezontle", style: "American Pale Ale" },
+        { name: "Brisa", style: "Session IPA" },
+        { name: "Magma", style: "Doble IPA (Imperial IPA)" },
+        { name: "Chula Vista", style: "West Coast IPA" },
+        { name: "Miramar", style: "Red IPA" },
+        { name: "Silice", style: "Czech Pils" },
+        { name: "Oleaje", style: "Mexican Lager (Lager con Maiz)" },
+        { name: "Aceituna naranja", style: "German Pils" },
+        { name: "Arcilla", style: "Red Ale" },
+      ].map((b, i) => (
+        <div
+          key={`${b.name}-${i}`}
+          className={`tara-beerBox ${b.name === "Magma" ? "is-magma" : ""}`}
+          data-aos="fade-up"
+          data-aos-delay={60 + i * 30}
+        >
+          <div className="tara-beerTop">
+            <div className="tara-beerName">{b.name}</div>
+            <div className="tara-beerBadge">{b.name === "Magma" ? "🔥" : "●"}</div>
+          </div>
+          <div className="tara-beerStyle">{b.style}</div>
+
+          <div className="tara-beerMeta">
+            <span className="tara-beerPill">Tarabaña</span>
+            <span className="tara-beerPill">Línea</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div className="tara-lineupFooter" data-aos="fade-up">
+      <Link className="tara-link" to="/taplist">Ver en Tap List →</Link>
+      <Link className="tara-link" to="/shop">Comprar / Cotizar →</Link>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA FINAL */}
       <section className="tara-sec tara-sec--cta">

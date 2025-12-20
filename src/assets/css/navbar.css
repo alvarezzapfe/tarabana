@@ -276,3 +276,31 @@
   .nav-cta { width: 100%; margin-left: 0; }
   .t-cta, .t-loginBtn { width: 100%; margin-top: 8px; }
 }
+
+
+/* ===== HOTFIX mobile clicks ===== */
+@media (max-width: 991.98px) {
+  /* Asegura que el panel capture clicks */
+  .custom-navbar .navbar-collapse.show,
+  .custom-navbar .navbar-collapse.show * {
+    pointer-events: auto !important;
+  }
+
+  /* Asegura que el overlay no tape el panel */
+  .t-navOverlay { z-index: 9998; }
+  .custom-navbar { z-index: 9999; }
+  .custom-navbar .navbar-collapse { z-index: 10000; }
+
+  /* Mejora tap targets */
+  .custom-navbar .nav-link.t-link {
+    display: block;
+    width: 100%;
+    padding: 14px 14px !important;
+    border-radius: 14px;
+  }
+
+  /* Evita que iOS haga highlight raro */
+  .custom-navbar a, .custom-navbar button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

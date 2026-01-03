@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./assets/css/about.css";
 
-import HistoryImg from "./assets/images/history.jpg"; // (o .JPEG si así quedó)
+import HistoryImg from "./assets/images/history.jpg";
 
 export default function About() {
   useEffect(() => {
@@ -41,11 +41,7 @@ export default function About() {
 
   // ===== reveal on scroll =====
   const rootRef = useRef(null);
-  const [inView, setInView] = useState({
-    hero: false,
-    story: false,
-    steps: false,
-  });
+  const [inView, setInView] = useState({ hero: false, story: false, steps: false });
 
   useEffect(() => {
     const root = rootRef.current;
@@ -61,7 +57,7 @@ export default function About() {
           io.unobserve(e.target);
         });
       },
-      { threshold: 0.15, rootMargin: "80px 0px -10% 0px" }
+      { threshold: 0.14, rootMargin: "90px 0px -12% 0px" }
     );
 
     els.forEach((el) => io.observe(el));
@@ -70,7 +66,6 @@ export default function About() {
 
   // ===== dynamic background (mouse) =====
   const bgRef = useRef(null);
-
   useEffect(() => {
     const el = bgRef.current;
     if (!el) return;
@@ -81,8 +76,8 @@ export default function About() {
     const onMove = (ev) => {
       const w = window.innerWidth || 1;
       const h = window.innerHeight || 1;
-      const x = (ev.clientX / w) * 100; // 0..100
-      const y = (ev.clientY / h) * 100; // 0..100
+      const x = (ev.clientX / w) * 100;
+      const y = (ev.clientY / h) * 100;
       el.style.setProperty("--mx", `${x.toFixed(2)}%`);
       el.style.setProperty("--my", `${y.toFixed(2)}%`);
     };
@@ -97,11 +92,7 @@ export default function About() {
     return (
       <div className="t-lines" aria-label={text}>
         {parts.map((line, i) => (
-          <span
-            key={i}
-            className="t-line"
-            style={{ ["--d"]: `${i * 90}ms` }}
-          >
+          <span key={i} className="t-line" style={{ ["--d"]: `${i * 90}ms` }}>
             {line}
           </span>
         ))}
@@ -113,7 +104,7 @@ export default function About() {
     <div className="t-aboutPage" ref={rootRef}>
       <Navbar />
 
-      {/* Fondo dinámico grande */}
+      {/* Fondo dinámico */}
       <div className="t-cineBg" ref={bgRef} aria-hidden>
         <div className="t-cineGlow" />
         <div className="t-cineGrid" />
@@ -123,49 +114,52 @@ export default function About() {
       <main className="t-cineWrap">
         {/* HERO */}
         <section className={`t-hero ${inView.hero ? "is-in" : ""}`} data-reveal="hero">
-          <div className="t-heroInner">
-            <div className="t-heroCopy">
-              <div className="t-kicker">
-                <span className="t-dot" aria-hidden />
-                Historia
-              </div>
-
-              <h1 className="t-title">
-                Tarabaña no se “hizo”.
-                <span className="t-shineText"> Se forjó.</span>
-              </h1>
-
-              <Lines
-                text={
-                  "Empezamos pequeños.\nAprendimos a escuchar el proceso.\nY decidimos no soltar la vara: nunca."
-                }
-              />
-
-              <div className="t-heroMeta">
-                <div className="t-metaItem">
-                  <div className="t-metaVal">3</div>
-                  <div className="t-metaLab">etapas</div>
-                </div>
-                <div className="t-metaItem">
-                  <div className="t-metaVal">10,000L</div>
-                  <div className="t-metaLab">mensuales</div>
-                </div>
-                <div className="t-metaItem">
-                  <div className="t-metaVal">{hlAnnual.toLocaleString()} hL</div>
-                  <div className="t-metaLab">anuales</div>
-                </div>
-              </div>
+          <div className="t-heroTop">
+            <div className="t-kicker">
+              <span className="t-dot" aria-hidden />
+              Historia
             </div>
 
-            <div className="t-heroMedia">
-              <div className="t-imgShell">
-                <img src={HistoryImg} alt="Historia de Tarabaña" />
-                <div className="t-imgVignette" aria-hidden />
+            <h1 className="t-title">
+              Tarabaña no se “hizo”.
+              <span className="t-shineText"> Se forjó.</span>
+            </h1>
+
+            <Lines
+              text={
+                "Empezamos pequeños.\nAprendimos a escuchar el proceso.\nY decidimos no soltar la vara: nunca."
+              }
+            />
+
+            <div className="t-heroMeta">
+              <div className="t-metaItem">
+                <div className="t-metaVal">Carácter</div>
+                <div className="t-metaLab"></div>
               </div>
-              <div className="t-caption">
+              <div className="t-metaItem">
+                <div className="t-metaVal">Constancia</div>
+                <div className="t-metaLab"></div>
+              </div>
+              <div className="t-metaItem">
+                <div className="t-metaVal">Resiliencia</div>
+                <div className="t-metaLab"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* ✅ Imagen CINEMA al centro, gigante */}
+          <div className="t-heroCenter">
+            <figure className="t-cineFigure">
+              <img src={HistoryImg} alt="Historia de Tarabaña" className="t-cineImg" />
+              <div className="t-cineVignette" aria-hidden />
+              <div className="t-cineBadge">
+                <span className="t-badgeDot" aria-hidden />
+                Condesa · CDMX · &nbsp;Lerma · Edo. Méx.
+              </div>
+              <figcaption className="t-cineCaption">
                 Donde empieza el olor a malta, empieza también la promesa.
-              </div>
-            </div>
+              </figcaption>
+            </figure>
           </div>
 
           <div className="t-scrollHint" aria-hidden>
@@ -189,32 +183,41 @@ export default function About() {
           </div>
         </section>
 
-        {/* STEPS */}
+        {/* STEPS / TIMELINE */}
         <section className={`t-steps ${inView.steps ? "is-in" : ""}`} data-reveal="steps">
           <div className="t-stepsHead">
             <h2>
-              Tres momentos. <span className="t-shineText">Una sola obsesión.</span>
+              Nuestra Historia <span className="t-shineText"></span>
             </h2>
-            <p>Que cada vaso cuente la misma historia: bien hecha.</p>
+            <p>2021 → 2026. La misma obsesión: consistencia, craft y carácter.</p>
+          </div>
+
+          {/* ✅ Timeline rail (neon traveling) */}
+          <div className="t-railWrap" aria-hidden>
+            <div className="t-railNeon" />
+            <div className="t-railNodes">
+              <span className="t-railNode is-start" title="2021" />
+              <span className="t-railNode" title="2024–2025" />
+              <span className="t-railNode is-end" title="2026" />
+            </div>
           </div>
 
           <div className="t-stepList">
             {steps.map((s, idx) => (
-              <article
-                key={s.year}
-                className="t-stepRow"
-                style={{ ["--d"]: `${idx * 120}ms` }}
-              >
+              <article key={s.year} className="t-stepRow" style={{ ["--d"]: `${idx * 140}ms` }}>
+                {/* Left: year + tag */}
                 <div className="t-stepLeft">
                   <div className="t-stepYear">{s.year}</div>
                   <div className="t-stepTag">{s.tag}</div>
                 </div>
 
+                {/* Mid: dot + line */}
                 <div className="t-stepMid" aria-hidden>
-                  <div className="t-stepIndex">{String(idx + 1).padStart(2, "0")}</div>
+                  <div className={`t-stepDot ${idx === 0 ? "is-start" : idx === steps.length - 1 ? "is-end" : ""}`} />
                   <div className="t-stepRule" />
                 </div>
 
+                {/* Right */}
                 <div className="t-stepRight">
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>

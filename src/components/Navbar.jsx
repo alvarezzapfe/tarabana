@@ -48,7 +48,9 @@ const Navbar = () => {
   }, [menuOpen]);
 
   const navClass = useMemo(() => {
-    return `navbar navbar-expand-lg navbar-dark custom-navbar ${scrolled ? "is-scrolled" : ""}`;
+    return `navbar navbar-expand-lg navbar-dark custom-navbar ${
+      scrolled ? "is-scrolled" : ""
+    }`;
   }, [scrolled]);
 
   return (
@@ -92,6 +94,13 @@ const Navbar = () => {
               </Link>
             </li>
 
+            {/* ✅ NUEVO */}
+            <li className="nav-item">
+              <Link to="/fabrica" className="nav-link t-link" onClick={closeMenu}>
+                Fábrica
+              </Link>
+            </li>
+
             <li className="nav-item">
               <Link to="/TapRoom" className="nav-link t-link" onClick={closeMenu}>
                 Tap Room
@@ -120,11 +129,10 @@ const Navbar = () => {
               </Link>
             </li>
 
-            {/* CTA Marrano (lujo) - sin recargar página */}
+            {/* CTA (minimal premium, sin shine) */}
             <li className="nav-item nav-cta">
               <Link to="/shop" className="t-cta" onClick={closeMenu}>
                 Comprar ahora
-                <span className="t-ctaShine" aria-hidden />
               </Link>
             </li>
           </ul>

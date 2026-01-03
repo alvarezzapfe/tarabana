@@ -1,306 +1,312 @@
 /* ===========================
-   NAVBAR PREMIUM (Tarabaña)
-   Paleta: azul oscuro + acento teal
+   TARABAÑA NAVBAR v3 (Modern Minimal)
+   Obsidian glass + subtle amber
    =========================== */
 
-/* Root navbar */
-.custom-navbar {
-  position: sticky;
-  top: 0;
-  z-index: 9999; /* único z-index, sin duplicados */
-  background: linear-gradient(45deg, #2c3e50, #34495e);
-  padding: 0.75rem 1.25rem;
-  transition: background 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+:root{
+  --t-bg0:#0b0f14;
+  --t-bg1:#0f1722;
+  --t-glass: rgba(16, 22, 33, 0.62);
+  --t-glass2: rgba(16, 22, 33, 0.82);
+  --t-border: rgba(255,255,255,0.10);
+  --t-text: rgba(243, 240, 232, 0.92);
+  --t-text2: rgba(243, 240, 232, 0.72);
+  --t-amber:#ffb547;
+  --t-copper:#d97706;
+  --t-agave:#2ee6a6;
+  --t-shadow: 0 14px 40px rgba(0,0,0,.30);
+  --t-shadow2: 0 22px 80px rgba(0,0,0,.38);
 }
 
-/* En scroll: glass + blur */
-.custom-navbar.is-scrolled {
-  background: linear-gradient(45deg, rgba(44, 62, 80, 0.86), rgba(52, 73, 94, 0.86));
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+/* Root navbar */
+.custom-navbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  background:
+    radial-gradient(1200px 400px at 12% -40%, rgba(255,181,71,0.12), transparent 60%),
+    radial-gradient(900px 380px at 92% -40%, rgba(46,230,166,0.06), transparent 55%),
+    linear-gradient(180deg, rgba(11,15,20,0.92), rgba(15,23,34,0.86));
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0.85rem 1.15rem;
+  transition: background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease, border-color .25s ease;
+  box-shadow: 0 6px 24px rgba(0,0,0,.26);
+}
+
+/* Scroll: glass */
+.custom-navbar.is-scrolled{
+  background:
+    radial-gradient(1200px 400px at 12% -40%, rgba(255,181,71,0.10), transparent 60%),
+    radial-gradient(900px 380px at 92% -40%, rgba(46,230,166,0.05), transparent 55%),
+    linear-gradient(180deg, rgba(9,12,16,0.72), rgba(12,18,28,0.68));
+
+  backdrop-filter: blur(14px) saturate(1.08);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: var(--t-shadow);
 }
 
 /* Brand */
-.brand-wrap {
+.brand-wrap{
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  z-index: 10000; /* por si overlays raros */
+  z-index: 10000;
 }
 
-/* LOGO grande */
-.logo-big {
-  height: 64px;
+/* Logo bigger */
+.logo-big{
+  height: 74px;
   width: auto;
-  transition: transform 0.25s ease, filter 0.25s ease;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
+  transition: transform .20s ease, filter .20s ease;
+  filter:
+    drop-shadow(0 18px 26px rgba(0,0,0,.35))
+    drop-shadow(0 0 20px rgba(255,181,71,.10));
   will-change: transform;
 }
 
-@media (max-width: 992px) {
-  .logo-big { height: 58px; }
-}
-@media (max-width: 420px) {
-  .logo-big { height: 52px; }
-}
+@media (max-width: 992px){ .logo-big{ height: 64px; } }
+@media (max-width: 420px){ .logo-big{ height: 58px; } }
 
-.brand-wrap:hover .logo-big {
+.brand-wrap:hover .logo-big{
   transform: translateY(-1px) scale(1.03);
+  filter:
+    drop-shadow(0 22px 34px rgba(0,0,0,.42))
+    drop-shadow(0 0 30px rgba(255,181,71,.14));
 }
 
-/* Glow detrás del logo */
-.brand-glow {
+/* Glow behind logo */
+.brand-glow{
   position: absolute;
-  inset: -18px -22px;
-  background: radial-gradient(closest-side, rgba(26, 188, 156, 0.22), transparent 65%);
-  filter: blur(6px);
+  inset: -20px -26px;
+  background:
+    radial-gradient(closest-side, rgba(255,181,71,0.16), transparent 65%),
+    radial-gradient(closest-side, rgba(46,230,166,0.06), transparent 70%);
+  filter: blur(12px);
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity .20s ease;
   pointer-events: none;
 }
-
-.brand-wrap:hover .brand-glow {
-  opacity: 1;
-}
+.brand-wrap:hover .brand-glow{ opacity: 1; }
 
 /* Links */
-.custom-navbar .nav-link {
-  color: rgba(236, 240, 241, 0.92);
-  font-size: 1rem;
-  transition: transform 0.18s ease, color 0.18s ease, opacity 0.18s ease;
-  margin-right: 0.35rem;
+.custom-navbar .nav-link{
+  color: var(--t-text);
+  font-size: 0.98rem;
+  letter-spacing: 0.15px;
+  transition: transform .16s ease, color .16s ease, background .16s ease, opacity .16s ease;
 }
 
-/* Link moderno con underline animado */
-.t-link {
+/* pill link */
+.t-link{
   position: relative;
-  padding: 0.6rem 0.75rem !important;
-  border-radius: 12px;
+  padding: 0.58rem 0.72rem !important;
+  border-radius: 14px;
   overflow: hidden;
   will-change: transform;
 }
 
-.t-link::after {
-  content: "";
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 8px;
+.t-link::after{
+  content:"";
+  position:absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 7px;
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(26,188,156,0),
-    rgba(26,188,156,0.95),
-    rgba(26,188,156,0)
-  );
+  background: linear-gradient(90deg, transparent, rgba(255,181,71,0.9), transparent);
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.22s ease;
-  opacity: 0.9;
+  transition: transform .18s ease;
+  opacity: 0.95;
 }
 
-.t-link:hover {
-  color: #1abc9c;
+.t-link:hover{
+  color: rgba(255,235,205,0.98);
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255,255,255,0.06);
 }
 
-.t-link:hover::after {
-  transform: scaleX(1);
+.t-link:hover::after{ transform: scaleX(1); }
+
+.t-link:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,181,71,0.22);
 }
 
-/* Toggler moderno */
-.custom-navbar .navbar-toggler {
-  border: none;
-}
+/* Toggler */
+.custom-navbar .navbar-toggler{ border: none; }
 
-.t-toggler {
-  width: 44px;
-  height: 40px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+.t-toggler{
+  width: 46px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
   display: grid;
   place-items: center;
   z-index: 10000;
+  box-shadow: 0 12px 30px rgba(0,0,0,.22);
+  transition: transform .16s ease, background .16s ease, border-color .16s ease;
+}
+.t-toggler:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.14);
 }
 
-.t-burger {
+/* Burger */
+.t-burger{
   width: 22px;
   height: 2px;
-  background: rgba(236, 240, 241, 0.92);
+  background: rgba(243,240,232,0.92);
   position: relative;
   border-radius: 999px;
-  transition: transform 0.2s ease;
 }
-
 .t-burger::before,
-.t-burger::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 22px;
-  height: 2px;
-  background: rgba(236, 240, 241, 0.92);
+.t-burger::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:22px;
+  height:2px;
+  background: rgba(243,240,232,0.92);
   border-radius: 999px;
-  transition: transform 0.2s ease, top 0.2s ease;
+  transition: transform .2s ease, top .2s ease;
 }
+.t-burger::before{ top:-7px; }
+.t-burger::after{ top: 7px; }
 
-.t-burger::before { top: -7px; }
-.t-burger::after  { top:  7px; }
-
-.t-toggler.is-open .t-burger { background: transparent; }
-.t-toggler.is-open .t-burger::before { top: 0; transform: rotate(45deg); }
-.t-toggler.is-open .t-burger::after  { top: 0; transform: rotate(-45deg); }
+.t-toggler.is-open .t-burger{ background: transparent; }
+.t-toggler.is-open .t-burger::before{ top:0; transform: rotate(45deg); }
+.t-toggler.is-open .t-burger::after { top:0; transform: rotate(-45deg); }
 
 /* UL */
-.nav-ul {
-  align-items: center;
-  gap: 2px;
-}
+.nav-ul{ align-items: center; gap: 2px; }
 
 /* Login button */
-.custom-navbar .btn-outline-light.t-loginBtn {
-  border-color: rgba(26, 188, 156, 0.9);
-  color: rgba(26, 188, 156, 0.95);
-  border-radius: 14px;
+.custom-navbar .btn-outline-light.t-loginBtn{
+  border-color: rgba(255,181,71,0.55);
+  color: rgba(255,213,156,0.95);
+  background: rgba(255,255,255,0.04);
+  border-radius: 16px;
   padding: 10px 14px;
-  font-weight: 800;
-  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
-  will-change: transform;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  transition: transform .16s ease, background .16s ease, color .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
-
-.custom-navbar .btn-outline-light.t-loginBtn:hover {
-  background: rgba(26, 188, 156, 0.95);
-  color: #ffffff;
+.custom-navbar .btn-outline-light.t-loginBtn:hover{
+  background: rgba(255,181,71,0.12);
+  border-color: rgba(255,181,71,0.85);
+  color: rgba(255,235,205,1);
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(26, 188, 156, 0.18);
+  box-shadow: 0 16px 34px rgba(0,0,0,.26);
 }
 
-/* CTA premium */
-.t-cta {
-  position: relative;
+/* CTA: modern minimal (no shine, no moving gradient) */
+.t-cta{
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 10px 14px;
-  border-radius: 14px;
+  border-radius: 16px;
   text-decoration: none;
-  color: #0b2b4a;
-  font-weight: 900;
+
+  color: rgba(255, 244, 230, 0.96);
+  font-weight: 950;
   letter-spacing: 0.2px;
-  background: linear-gradient(135deg, rgba(60, 170, 255, 0.65), rgba(255, 210, 120, 0.70));
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-  transition: transform 0.18s ease, filter 0.18s ease;
-  overflow: hidden;
-  will-change: transform;
+
+  background: rgba(255,181,71,0.10); /* subtle amber glass */
+  border: 1px solid rgba(255,181,71,0.40);
+  box-shadow: 0 14px 36px rgba(0,0,0,.22);
+  transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
 }
 
-.t-cta:hover {
+.t-cta:hover{
   transform: translateY(-1px);
-  filter: saturate(1.1);
+  background: rgba(255,181,71,0.14);
+  border-color: rgba(255,181,71,0.58);
+  box-shadow: 0 18px 54px rgba(0,0,0,.30);
 }
 
-.t-ctaShine {
-  position: absolute;
-  top: -40%;
-  left: -30%;
-  width: 40%;
-  height: 180%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
-  transform: rotate(20deg);
-  animation: shine 2.4s ease-in-out infinite;
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-@keyframes shine {
-  0%   { transform: translateX(-120%) rotate(20deg); }
-  45%  { transform: translateX(260%) rotate(20deg); }
-  100% { transform: translateX(260%) rotate(20deg); }
+.t-cta:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,181,71,0.22), 0 18px 54px rgba(0,0,0,.30);
 }
 
 /* CTA spacing */
-.nav-cta { margin-left: 6px; }
+.nav-cta{ margin-left: 8px; }
 
-/* ===========================
-   MOBILE: panel + overlay + clicks
-   =========================== */
-
-/* Overlay detrás del menú */
-.t-navOverlay {
+/* ===== Mobile overlay + panel ===== */
+.t-navOverlay{
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.18);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,.28);
+  backdrop-filter: blur(10px);
   z-index: 9998;
 }
 
-/* Asegura panel encima */
-.custom-navbar .navbar-collapse {
+.custom-navbar .navbar-collapse{
   position: relative;
-  z-index: 9999;
+  z-index: 10000;
 }
 
-/* En mobile: SOLO cuando está abierto (show) se pinta como panel */
-@media (max-width: 991.98px) {
-  .custom-navbar .navbar-collapse.show {
-    margin-top: 10px;
-    padding: 12px;
-    border-radius: 18px;
-    background: rgba(44, 62, 80, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 18px 60px rgba(0,0,0,.28);
-    transform-origin: top;
-    animation: tDrop 180ms ease both;
+@media (max-width: 991.98px){
+  .custom-navbar{ padding: 0.85rem 0.95rem; }
 
-    /* por si hay muchos items */
+  .custom-navbar .navbar-collapse.show{
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 20px;
+
+    background:
+      radial-gradient(900px 420px at 10% -40%, rgba(255,181,71,0.12), transparent 60%),
+      linear-gradient(180deg, rgba(12,18,28,0.92), rgba(10,14,20,0.92));
+
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px) saturate(1.06);
+    box-shadow: var(--t-shadow2);
+
+    transform-origin: top;
+    animation: tDrop 190ms ease both;
+
     max-height: calc(100vh - 120px);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  @keyframes tDrop {
-    from { opacity: 0; transform: translateY(-8px) scale(0.985); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+  @keyframes tDrop{
+    from{ opacity: 0; transform: translateY(-10px) scale(0.985); }
+    to{ opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  .custom-navbar .nav-link { margin-right: 0; }
+  .custom-navbar .nav-link{ margin-right: 0; }
+  .custom-navbar .nav-item{ margin: 6px 0; }
 
-  .custom-navbar .nav-item { margin: 6px 0; }
+  .nav-cta{ width: 100%; margin-left: 0; }
+  .t-cta, .t-loginBtn{ width: 100%; margin-top: 8px; }
 
-  .nav-cta { width: 100%; margin-left: 0; }
-  .t-cta, .t-loginBtn { width: 100%; margin-top: 8px; }
-}
-
-
-/* ===== HOTFIX mobile clicks ===== */
-@media (max-width: 991.98px) {
-  /* Asegura que el panel capture clicks */
-  .custom-navbar .navbar-collapse.show,
-  .custom-navbar .navbar-collapse.show * {
-    pointer-events: auto !important;
-  }
-
-  /* Asegura que el overlay no tape el panel */
-  .t-navOverlay { z-index: 9998; }
-  .custom-navbar { z-index: 9999; }
-  .custom-navbar .navbar-collapse { z-index: 10000; }
-
-  /* Mejora tap targets */
-  .custom-navbar .nav-link.t-link {
+  .custom-navbar .nav-link.t-link{
     display: block;
     width: 100%;
     padding: 14px 14px !important;
-    border-radius: 14px;
+    border-radius: 16px;
   }
 
-  /* Evita que iOS haga highlight raro */
-  .custom-navbar a, .custom-navbar button {
+  .custom-navbar a,
+  .custom-navbar button{
     -webkit-tap-highlight-color: transparent;
   }
+}
+
+/* Safety clicks */
+@media (max-width: 991.98px){
+  .custom-navbar .navbar-collapse.show,
+  .custom-navbar .navbar-collapse.show *{
+    pointer-events: auto !important;
+  }
+  .t-navOverlay{ z-index: 9998; }
+  .custom-navbar{ z-index: 9999; }
+  .custom-navbar .navbar-collapse{ z-index: 10000; }
 }

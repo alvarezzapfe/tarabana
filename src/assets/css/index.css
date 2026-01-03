@@ -4,23 +4,36 @@
   --bg1:#fffaf2;
   --ink:#0f1b2a;
   --muted:#4b5b70;
+
   --card: rgba(255,255,255,0.72);
   --border: rgba(15,27,42,0.10);
   --shadow: 0 18px 45px rgba(15,27,42,0.10);
-  --accentA:#ffd780;
-  --accentB:#78beff;
 
-  /* Ajustes finos del hero */
-  --hero-overlay: rgba(255,250,242,0.78); /* baja si quieres ver más foto */
+  /* Orange family (naranjozo premium) */
+  --orange0:#ffb44d;
+  --orange1:#ff7a18;
+  --orange2:#d84d00;
+
+  --hero-overlayA: rgba(10, 14, 22, 0.62);
+  --hero-overlayB: rgba(10, 14, 22, 0.26);
+
+  --hero-parallax-x: 0;
+  --hero-parallax-y: 0;
+
+  --hero-background-image: none;
+  --hero2-background-image: none;
 }
+
+*{ box-sizing: border-box; }
 
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
   color: var(--ink);
-  background: radial-gradient(900px 500px at 20% 0%, rgba(255,215,128,0.45), transparent 60%),
-              radial-gradient(900px 520px at 80% 10%, rgba(120,190,255,0.35), transparent 60%),
-              linear-gradient(180deg, var(--bg1), var(--bg0));
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgba(255,180,77,0.28), transparent 60%),
+    radial-gradient(900px 520px at 80% 10%, rgba(255,122,24,0.18), transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg0));
 }
 
 .tara a{ color: inherit; }
@@ -30,187 +43,258 @@ body{
 }
 
 /* =========================
-   HERO (HD / crisp background)
+   HERO — BIGGER + UHD
    ========================= */
 .tara-hero{
   position: relative;
-  min-height: 92vh;
+  min-height: 94vh;
   display: grid;
   align-items: center;
   overflow: hidden;
-
-  /* Importante: evita que el navegador “suavice de más” el render */
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Fondo real del hero (en pseudo-elemento) */
+.tara-hero--xl{
+  min-height: 104vh;
+}
+
 .tara-hero::before{
   content:"";
   position:absolute;
-  inset:-2px; /* evita bordes raros al escalar */
+  inset:0;
   background-image: var(--hero-background-image);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 
-  /* “crispness” */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  transform: translateZ(0) scale(1.02); /* micro-escala para nitidez */
+  transform: translate3d(calc(var(--hero-parallax-x) * 1px), calc(var(--hero-parallax-y) * 1px), 0) scale(1.12);
   will-change: transform;
 
-  /* Un pelín de contraste para que se vea “HD” */
-  filter: saturate(1.08) contrast(1.06) brightness(1.02);
+  filter: saturate(1.05) contrast(1.12) brightness(0.98);
 }
 
-/* Overlay: si está muy fuerte “lava” la foto. */
 .tara-hero__overlay{
   position:absolute;
   inset:0;
-  background: linear-gradient(
-    90deg,
-    var(--hero-overlay),
-    rgba(255,250,242,0.52)
-  );
+  background:
+    radial-gradient(900px 520px at 18% 14%, rgba(255,180,77,0.20), transparent 60%),
+    radial-gradient(900px 560px at 86% 18%, rgba(255,122,24,0.16), transparent 62%),
+    linear-gradient(90deg, var(--hero-overlayA) 0%, var(--hero-overlayB) 58%, rgba(10,14,22,0.14) 100%);
 }
 
-/* Grid encima, súper sutil */
-.tara-hero__grid{
+.tara-hero__fx{
   position:absolute;
   inset:0;
-  background-image:
-    linear-gradient(rgba(15,27,42,0.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,27,42,0.10) 1px, transparent 1px);
-  background-size: 44px 44px;
-  opacity: 0.14;
-  mix-blend-mode: multiply;
-  pointer-events: none;
+  pointer-events:none;
+  background:
+    radial-gradient(120% 90% at 50% 18%, rgba(255,255,255,0.06), transparent 55%),
+    radial-gradient(120% 90% at 50% 70%, rgba(0,0,0,0.58), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.36));
 }
 
-/* Parallax suave SOLO desktop (mejora “wow”; en mobile se evita) */
-@media (min-width: 992px){
-  .tara-hero::before{
-    background-attachment: fixed;
-  }
+@media (prefers-reduced-motion: reduce){
+  .tara-hero::before{ transform: scale(1.06); }
 }
 
 .tara-hero__inner{
   position: relative;
   display: grid;
-  grid-template-columns: 1.2fr 0.9fr;
+  grid-template-columns: 1.18fr 0.92fr;
   gap: 18px;
-  padding: 88px 0 54px;
+  padding: 102px 0 64px;
 }
 @media (max-width: 920px){
-  .tara-hero__inner{ grid-template-columns: 1fr; padding-top: 72px; }
+  .tara-hero__inner{ grid-template-columns: 1fr; padding-top: 82px; }
 }
 
+/* ===== Hero typography ===== */
 .tara-kicker{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding: 8px 12px;
+  gap:10px;
+  padding: 9px 12px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid var(--border);
-  font-weight: 800;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+  font-weight: 950;
   font-size: 12px;
+  color: rgba(255,255,255,0.88);
+  backdrop-filter: blur(10px);
+}
+.tara-kickerDot{
+  width: 10px; height: 10px; border-radius: 999px;
+  background: rgba(255,180,77,0.96);
+  box-shadow: 0 0 0 8px rgba(255,180,77,0.14);
 }
 
 .tara-hero__copy h1{
-  margin: 12px 0 8px;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  font-size: clamp(34px, 4vw, 54px);
+  margin: 14px 0 10px;
+  font-weight: 1100;
+  letter-spacing: -0.035em;
+  font-size: clamp(38px, 4.7vw, 62px);
   line-height: 1.02;
-}
-.tara-hero__copy p{
-  margin: 0;
-  color: var(--muted);
-  font-size: 16px;
-  max-width: 58ch;
+  color: rgba(255,255,255,0.94);
 }
 
+.tara-gradientText{
+  background: linear-gradient(90deg, rgba(255,180,77,1), rgba(255,122,24,0.95));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tara-hero__copy p{
+  margin: 0;
+  color: rgba(255,255,255,0.74);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 64ch;
+  font-weight: 700;
+}
+
+/* ===== Buttons (orange aesthetic) ===== */
 .tara-hero__ctas{
-  margin-top: 16px;
+  margin-top: 18px;
   display:flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
 .tara-btn{
-  height: 42px;
+  height: 46px;
   padding: 0 16px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.72);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.10);
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap: 10px;
   text-decoration:none;
-  font-weight: 800;
-  box-shadow: 0 10px 22px rgba(15,27,42,0.10);
-  transition: transform .12s ease, box-shadow .12s ease;
+  font-weight: 950;
+  color: rgba(255,255,255,0.92);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+  backdrop-filter: blur(10px);
+  transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease, filter .14s ease;
 }
-.tara-btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 32px rgba(15,27,42,0.14); }
-.tara-btn--primary{
-  background: linear-gradient(90deg, var(--accentA), var(--accentB));
-  border-color: transparent;
-}
-.tara-btn--ghost{
-  background: rgba(255,255,255,0.55);
-}
-.tara-btn--full{ width: 100%; justify-content: center; }
 
+.tara-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 62px rgba(0,0,0,0.30);
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.20);
+}
+
+.tara-btn--orange{
+  background: linear-gradient(135deg, rgba(255,180,77,0.98), rgba(255,122,24,0.92));
+  border-color: transparent;
+  color: rgba(10,14,22,0.92);
+  box-shadow: 0 18px 66px rgba(0,0,0,0.34);
+}
+.tara-btn--orange:hover{
+  filter: saturate(1.07) contrast(1.03);
+}
+
+.tara-btn--orangeGhost{
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,180,77,0.28);
+  color: rgba(255,255,255,0.92);
+}
+.tara-btn--orangeGhost:hover{
+  border-color: rgba(255,180,77,0.42);
+  background: rgba(255,255,255,0.14);
+}
+
+.tara-btn--full{ width: 100%; }
+
+/* Mini meta */
 .tara-mini{
-  margin-top: 12px;
+  margin-top: 14px;
   display:flex;
   gap: 14px;
   flex-wrap: wrap;
-  color: var(--muted);
-  font-weight: 700;
+  color: rgba(255,255,255,0.72);
+  font-weight: 800;
   font-size: 13px;
 }
-.tara-mini i{ opacity: .8; }
+.tara-mini i{ opacity: .9; }
 
-/* Glass card */
-.tara-hero__card{ align-self: center; }
-.tara-glassCard{
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 16px;
-  box-shadow: var(--shadow);
+.tara-mini--hero span{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
   backdrop-filter: blur(10px);
 }
+
+/* micro link */
+.tara-hero__micro{ margin-top: 14px; }
+.tara-microLink{
+  font-weight: 950;
+  text-decoration: none;
+  color: rgba(255,255,255,0.74);
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+.tara-microLink:hover{ color: rgba(255,255,255,0.90); }
+
+/* ===== Hero Card (dark) ===== */
+.tara-hero__card{ align-self: center; }
+
+.tara-glassCard{
+  border-radius: 24px;
+  padding: 16px;
+}
+
+.tara-glassCard--dark{
+  background: rgba(10,14,22,0.44);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 26px 90px rgba(0,0,0,0.34);
+  backdrop-filter: blur(14px) saturate(1.08);
+}
+
 .tara-glassCard__top{
   display:flex;
   justify-content: space-between;
   gap: 10px;
   align-items: flex-start;
 }
+
 .tara-glassCard__top h3{
   margin:0;
-  font-weight: 900;
+  font-weight: 1100;
   letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.92);
 }
+
 .tara-glassCard__top p{
   margin: 4px 0 0;
-  color: var(--muted);
+  color: rgba(255,255,255,0.70);
   font-size: 13.5px;
+  line-height: 1.45;
+  font-weight: 700;
 }
+
 .tara-pill{
   height: 26px;
   padding: 0 10px;
   border-radius: 999px;
   display:inline-flex;
   align-items:center;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.8);
-  font-weight: 900;
+  font-weight: 950;
   font-size: 12px;
+}
+
+.tara-pill--live{
+  border: 1px solid rgba(255,180,77,0.34);
+  background: rgba(255,180,77,0.12);
+  color: rgba(255,255,255,0.88);
 }
 
 .tara-glassCard__rows{
@@ -218,24 +302,31 @@ body{
   gap: 10px;
   margin-top: 12px;
 }
+
 .tara-row{
   display:flex;
   gap: 10px;
   align-items:flex-start;
   padding: 10px;
-  border-radius: 16px;
-  border: 1px solid rgba(15,27,42,0.08);
-  background: rgba(255,255,255,0.55);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.08);
 }
+
 .tara-dot{
   width: 10px;
   height: 10px;
   border-radius: 999px;
   margin-top: 4px;
 }
-.tara-dot--a{ background: #ffd780; }
-.tara-dot--b{ background: #78beff; }
-.tara-muted{ color: var(--muted); font-size: 12.5px; }
+.tara-dot--a{ background: rgba(255,180,77,0.95); }
+.tara-dot--b{ background: rgba(255,122,24,0.95); }
+
+.tara-muted{
+  color: rgba(255,255,255,0.68);
+  font-size: 12.5px;
+  font-weight: 700;
+}
 
 .tara-glassCard__ctas{
   margin-top: 12px;
@@ -243,19 +334,186 @@ body{
   gap: 10px;
 }
 
-/* Sections */
+.tara-glassCard__hint{
+  margin-top: 12px;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px dashed rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.68);
+  font-weight: 850;
+  font-size: 12.5px;
+}
+
+.tara-hintDot{
+  width: 10px; height: 10px; border-radius: 999px;
+  background: rgba(46,230,166,0.92);
+  box-shadow: 0 0 0 8px rgba(46,230,166,0.12);
+}
+
+/* =========================
+   CRAFT (hero2)
+   ========================= */
+.tara-craft{
+  position: relative;
+  padding: 74px 0;
+  overflow: hidden;
+}
+
+.tara-craft__bg{
+  position:absolute;
+  inset: 0;
+  background:
+    radial-gradient(900px 520px at 14% 10%, rgba(255,180,77,0.20), transparent 60%),
+    radial-gradient(900px 560px at 84% 12%, rgba(255,122,24,0.16), transparent 62%),
+    linear-gradient(180deg, rgba(10,14,22,0.92), rgba(10,14,22,0.88));
+}
+
+.tara-craft__inner{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 18px;
+  align-items: center;
+}
+
+@media (max-width: 980px){
+  .tara-craft__inner{ grid-template-columns: 1fr; }
+}
+
+.tara-craftKicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-weight: 950;
+  font-size: 12px;
+  color: rgba(255,255,255,0.86);
+  backdrop-filter: blur(10px);
+}
+
+.tara-craftDot{
+  width: 10px; height: 10px; border-radius: 999px;
+  background: rgba(255,180,77,0.96);
+  box-shadow: 0 0 0 8px rgba(255,180,77,0.14);
+}
+
+.tara-craft__copy h2{
+  margin: 14px 0 10px;
+  font-weight: 1100;
+  letter-spacing: -0.03em;
+  font-size: clamp(28px, 3.3vw, 44px);
+  line-height: 1.06;
+  color: rgba(255,255,255,0.94);
+}
+
+.tara-craft__copy p{
+  margin: 0;
+  color: rgba(255,255,255,0.74);
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 700;
+  max-width: 68ch;
+}
+
+.tara-craftBullets{
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
+}
+@media (max-width: 720px){
+  .tara-craftBullets{ grid-template-columns: 1fr; }
+}
+
+.tara-craftBullet{
+  padding: 14px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+}
+.tara-craftBullet strong{
+  color: rgba(255,255,255,0.92);
+  font-weight: 1100;
+}
+.tara-muted2{
+  margin-top: 4px;
+  color: rgba(255,255,255,0.66);
+  font-weight: 750;
+  font-size: 12.5px;
+}
+
+.tara-craftCtas{
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tara-craft__media{
+  display: grid;
+  gap: 10px;
+}
+
+.tara-craftImg{
+  height: 420px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background-image: var(--hero2-background-image);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 28px 90px rgba(0,0,0,0.36);
+  filter: saturate(1.06) contrast(1.10);
+  position: relative;
+  overflow: hidden;
+}
+.tara-craftImg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(110% 80% at 50% 20%, rgba(255,255,255,0.08), transparent 55%),
+    radial-gradient(120% 90% at 50% 70%, rgba(0,0,0,0.60), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.35));
+  pointer-events:none;
+}
+
+@media (max-width: 980px){
+  .tara-craftImg{ height: 320px; }
+}
+
+.tara-craftCaption{
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.66);
+  padding: 8px 2px;
+}
+
+/* =========================
+   SECTIONS BASE
+   ========================= */
 .tara-sec{ padding: 64px 0; }
+
 .tara-sec--alt{
   background: rgba(255,255,255,0.55);
   border-top: 1px solid rgba(15,27,42,0.06);
   border-bottom: 1px solid rgba(15,27,42,0.06);
 }
+
 .tara-secHead h2{
   margin:0;
-  font-weight: 900;
+  font-weight: 1100;
   letter-spacing: -0.02em;
 }
-.tara-secHead p{ margin: 6px 0 0; color: var(--muted); }
+.tara-secHead p{ margin: 6px 0 0; color: var(--muted); font-weight: 700; }
 
 .tara-split{
   display:grid;
@@ -274,10 +532,8 @@ body{
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
 }
-.tara-card--media{
-  padding: 0;
-  overflow:hidden;
-}
+
+.tara-card--media{ padding: 0; overflow:hidden; }
 .tara-card--media img{
   width:100%;
   height: 100%;
@@ -286,8 +542,8 @@ body{
   max-height: 360px;
 }
 
-.tara-card h2{ margin: 0 0 8px; font-weight: 900; }
-.tara-card p{ margin: 0; color: var(--muted); line-height: 1.6; }
+.tara-card h2{ margin: 0 0 8px; font-weight: 1100; }
+.tara-card p{ margin: 0; color: var(--muted); line-height: 1.6; font-weight: 700; }
 
 .tara-bullets{
   margin-top: 14px;
@@ -303,7 +559,7 @@ body{
   border-radius: 16px;
   border: 1px solid rgba(15,27,42,0.08);
   background: rgba(255,255,255,0.55);
-  font-weight: 800;
+  font-weight: 950;
 }
 
 .tara-inline-cta{
@@ -312,69 +568,47 @@ body{
   gap: 12px;
   flex-wrap: wrap;
 }
-.tara-link{
-  font-weight: 900;
-  text-decoration:none;
-}
+.tara-link{ font-weight: 1000; text-decoration:none; }
 .tara-link:hover{ text-decoration: underline; }
 
-/* Grid cards */
-.tara-grid3{
-  margin-top: 14px;
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-@media (max-width: 900px){ .tara-grid3{ grid-template-columns: 1fr; } }
-.tara-miniCard{
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 16px;
-  box-shadow: var(--shadow);
-}
-.tara-miniCard h3{ margin:0; font-weight: 900; }
-.tara-miniCard p{ margin: 6px 0 10px; color: var(--muted); }
-
-/* CTA */
-.tara-sec--cta{
-  padding: 54px 0 72px;
-}
+/* =========================
+   CTA FINAL
+   ========================= */
+.tara-sec--cta{ padding: 54px 0 72px; }
 .tara-cta{
   display:flex;
   justify-content: space-between;
   align-items:center;
   gap: 12px;
   flex-wrap: wrap;
-  background: linear-gradient(90deg, rgba(255,215,128,0.60), rgba(120,190,255,0.45));
+  background: linear-gradient(90deg, rgba(255,180,77,0.55), rgba(255,122,24,0.35));
   border: 1px solid rgba(15,27,42,0.08);
   border-radius: 22px;
   padding: 18px;
   box-shadow: var(--shadow);
 }
-.tara-cta h3{ margin:0; font-weight: 900; }
-.tara-cta p{ margin: 6px 0 0; color: rgba(15,27,42,0.72); font-weight: 700; }
+.tara-cta h3{ margin:0; font-weight: 1100; }
+.tara-cta p{ margin: 6px 0 0; color: rgba(15,27,42,0.72); font-weight: 800; }
 .tara-ctaBtns{ display:flex; gap: 10px; flex-wrap: wrap; }
 
+/* =========================================================
+   CERVEZAS DE LÍNEA — TURBO (no rompe tu estructura)
+   ========================================================= */
 
-/* =========================
-   CERVEZAS DE LÍNEA (PRO)
-   ========================= */
-
-.tara-lineupHero{
-  margin-top: 16px;
-  display: grid;
-  place-items: center;
-}
+/* Magma hero refinado */
+.tara-lineupHero{ margin-top: 18px; display: grid; place-items: center; }
 
 .tara-magmaHero{
   width: 100%;
   max-width: 980px;
-  border: 1px solid rgba(15,27,42,0.10);
-  background: rgba(255,255,255,0.62);
-  border-radius: 26px;
-  padding: 18px;
-  box-shadow: 0 22px 60px rgba(15,27,42,0.14);
+  border-radius: 28px;
+  padding: 20px;
+  border: 1px solid rgba(255,122,24,0.18);
+  background:
+    radial-gradient(900px 520px at 18% 15%, rgba(255,180,77,0.20), transparent 60%),
+    radial-gradient(900px 520px at 86% 20%, rgba(255,122,24,0.16), transparent 60%),
+    rgba(255,255,255,0.66);
+  box-shadow: 0 28px 90px rgba(15,27,42,0.16);
   backdrop-filter: blur(12px);
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -382,77 +616,56 @@ body{
   align-items: center;
   cursor: pointer;
   text-align: left;
-  transition: transform .14s ease, box-shadow .14s ease;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
   position: relative;
   overflow: hidden;
 }
-
 .tara-magmaHero:hover{
   transform: translateY(-2px);
-  box-shadow: 0 30px 80px rgba(15,27,42,0.18);
+  border-color: rgba(255,122,24,0.28);
+  box-shadow: 0 36px 110px rgba(15,27,42,0.18);
 }
-
 @media (max-width: 900px){
   .tara-magmaHero{ grid-template-columns: 1fr; }
 }
-
-.tara-magmaHero::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background:
-    radial-gradient(900px 380px at 18% 15%, rgba(255,215,128,0.55), transparent 60%),
-    radial-gradient(900px 420px at 85% 20%, rgba(120,190,255,0.40), transparent 60%);
-  opacity: .65;
-  pointer-events: none;
-}
-
-.tara-magmaHero__left{
-  position: relative;
-  z-index: 1;
-}
-
 .tara-chip{
   display:inline-flex;
   align-items:center;
   height: 28px;
   padding: 0 12px;
   border-radius: 999px;
-  font-weight: 900;
+  font-weight: 950;
   font-size: 12px;
-  border: 1px solid rgba(15,27,42,0.10);
-  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,122,24,0.18);
+  background: rgba(255,180,77,0.14);
+  color: rgba(15,27,42,0.86);
 }
 
 .tara-magmaHero h3{
   margin: 10px 0 6px;
-  font-weight: 1000;
+  font-weight: 1100;
   letter-spacing: -0.03em;
   font-size: clamp(26px, 3.2vw, 40px);
 }
-
 .tara-magmaHero p{
   margin: 0;
-  color: var(--muted);
-  font-weight: 700;
+  color: rgba(15,27,42,0.72);
+  font-weight: 800;
   line-height: 1.5;
 }
-
 .tara-magmaHint{
   margin-top: 10px;
   font-size: 12.5px;
-  color: rgba(15,27,42,0.72);
-  font-weight: 800;
+  color: rgba(15,27,42,0.70);
+  font-weight: 900;
 }
 
 .tara-magmaHero__right{
   position: relative;
-  z-index: 1;
   display: grid;
   place-items: center;
   min-height: 220px;
 }
-
 .tara-magmaCan{
   width: min(360px, 90%);
   height: auto;
@@ -462,12 +675,9 @@ body{
   will-change: transform;
   filter: drop-shadow(0 26px 38px rgba(15,27,42,0.22));
 }
-
-/* Animación cabrona: gira sobre eje (Y) + un twist (Z) y regresa */
 .tara-magmaCan.is-spinning{
   animation: taraSpinReturn 1150ms cubic-bezier(.18,.84,.22,1) both;
 }
-
 @keyframes taraSpinReturn{
   0%   { transform: perspective(900px) rotateY(0deg) rotateZ(0deg) scale(1); }
   18%  { transform: perspective(900px) rotateY(70deg) rotateZ(4deg) scale(1.03); }
@@ -475,29 +685,25 @@ body{
   78%  { transform: perspective(900px) rotateY(300deg) rotateZ(3deg) scale(1.02); }
   100% { transform: perspective(900px) rotateY(360deg) rotateZ(0deg) scale(1); }
 }
-
 @media (prefers-reduced-motion: reduce){
   .tara-magmaCan.is-spinning{ animation: none; }
-  .tara-magmaHero, .tara-beerBox{ transition: none; }
 }
-
 .tara-magmaGlow{
   position:absolute;
   inset: -20px;
-  background: radial-gradient(closest-side, rgba(255,215,128,0.42), transparent 62%);
+  background: radial-gradient(closest-side, rgba(255,180,77,0.28), transparent 62%);
   filter: blur(14px);
   opacity: .9;
   pointer-events: none;
 }
 
-/* GRID 10 boxes perfectos */
+/* Grid */
 .tara-lineupGrid{
-  margin-top: 16px;
+  margin-top: 18px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
 }
-
 @media (max-width: 1100px){
   .tara-lineupGrid{ grid-template-columns: repeat(3, 1fr); }
 }
@@ -505,76 +711,190 @@ body{
   .tara-lineupGrid{ grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Beer boxes orange premium + image + ibu */
 .tara-beerBox{
-  background: rgba(255,255,255,0.62);
-  border: 1px solid rgba(15,27,42,0.10);
-  border-radius: 18px;
+  position: relative;
+  border-radius: 20px;
   padding: 14px;
-  box-shadow: 0 14px 34px rgba(15,27,42,0.10);
-  backdrop-filter: blur(10px);
+  min-height: 220px;
   display: grid;
   gap: 10px;
-  min-height: 140px; /* geometría consistente */
-  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+
+  background:
+    radial-gradient(700px 380px at 20% 0%, rgba(255,180,77,0.20), transparent 60%),
+    radial-gradient(700px 380px at 90% 10%, rgba(255,122,24,0.14), transparent 60%),
+    rgba(255,255,255,0.70);
+  border: 1px solid rgba(255,122,24,0.16);
+  box-shadow: 0 16px 44px rgba(15,27,42,0.12);
+  backdrop-filter: blur(10px);
+
+  transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease, filter .14s ease;
+  overflow: hidden;
+}
+
+.tara-beerBox::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(420px 220px at 20% 0%, rgba(255,180,77,0.18), transparent 60%),
+    radial-gradient(420px 240px at 80% 10%, rgba(255,122,24,0.12), transparent 60%);
+  opacity: .75;
+  pointer-events:none;
 }
 
 .tara-beerBox:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 18px 45px rgba(15,27,42,0.14);
-  border-color: rgba(26,188,156,0.35);
+  transform: translateY(-3px);
+  border-color: rgba(255,122,24,0.26);
+  box-shadow: 0 22px 70px rgba(15,27,42,0.16);
+  filter: saturate(1.02);
 }
 
+.tara-beerBox.is-magma{
+  background:
+    radial-gradient(760px 420px at 20% 0%, rgba(255,180,77,0.28), transparent 62%),
+    radial-gradient(760px 420px at 90% 10%, rgba(255,122,24,0.20), transparent 62%),
+    linear-gradient(135deg, rgba(255,180,77,0.18), rgba(255,122,24,0.10)),
+    rgba(255,255,255,0.70);
+  border-color: rgba(255,122,24,0.30);
+}
+
+/* Top row */
 .tara-beerTop{
+  position: relative;
+  z-index: 1;
   display:flex;
   align-items:center;
   justify-content: space-between;
   gap: 10px;
 }
-
 .tara-beerName{
-  font-weight: 1000;
+  font-weight: 1100;
   letter-spacing: -0.02em;
   font-size: 14px;
+  color: rgba(15,27,42,0.92);
 }
-
 .tara-beerBadge{
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
   display:grid;
   place-items:center;
+  border: 1px solid rgba(255,122,24,0.18);
+  background: rgba(255,180,77,0.14);
+  font-weight: 950;
+}
+
+/* Image */
+.tara-beerMedia{
+  position: relative;
+  z-index: 1;
+  border-radius: 16px;
+  overflow: hidden;
   border: 1px solid rgba(15,27,42,0.10);
-  background: rgba(255,255,255,0.72);
-  font-weight: 900;
+  background: rgba(255,255,255,0.70);
+  box-shadow: 0 14px 36px rgba(15,27,42,0.12);
+}
+.tara-beerMedia img{
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  filter: saturate(1.06) contrast(1.06);
+}
+.tara-beerBox:hover .tara-beerMedia img{
+  transform: scale(1.05);
+  transition: transform .18s ease;
 }
 
 .tara-beerStyle{
-  color: rgba(15,27,42,0.72);
-  font-weight: 800;
+  position: relative;
+  z-index: 1;
+  color: rgba(15,27,42,0.78);
+  font-weight: 950;
   font-size: 12.5px;
-  line-height: 1.35;
+  line-height: 1.25;
+}
+.tara-beerNotes{
+  position: relative;
+  z-index: 1;
+  color: rgba(15,27,42,0.68);
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1.25;
 }
 
 .tara-beerMeta{
-  margin-top: auto;
+  position: relative;
+  z-index: 1;
   display:flex;
   gap: 8px;
   flex-wrap: wrap;
 }
-
 .tara-beerPill{
   height: 24px;
   padding: 0 10px;
   border-radius: 999px;
-  border: 1px solid rgba(15,27,42,0.10);
-  background: rgba(255,255,255,0.70);
-  font-weight: 900;
+  border: 1px solid rgba(255,122,24,0.18);
+  background: rgba(255,180,77,0.12);
+  font-weight: 950;
   font-size: 11px;
+  color: rgba(15,27,42,0.86);
 }
 
-.tara-beerBox.is-magma{
-  background: linear-gradient(135deg, rgba(255,215,128,0.40), rgba(120,190,255,0.28));
-  border-color: rgba(15,27,42,0.12);
+/* IBU bar */
+.tara-ibu{
+  position: relative;
+  z-index: 1;
+  display:grid;
+  gap: 8px;
+  margin-top: 2px;
+}
+.tara-ibuTop{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.tara-ibuLabel{
+  font-weight: 1000;
+  font-size: 11.5px;
+  color: rgba(15,27,42,0.78);
+}
+.tara-ibuValue{
+  font-weight: 1000;
+  font-size: 11.5px;
+  color: rgba(15,27,42,0.78);
+}
+.tara-ibuTrack{
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(15,27,42,0.10);
+  background:
+    linear-gradient(90deg,
+      rgba(210,255,80,0.55),
+      rgba(130,235,80,0.55),
+      rgba(40,190,70,0.55)
+    );
+  box-shadow: inset 0 0 0 999px rgba(255,255,255,0.14);
+}
+.tara-ibuFill{
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d6ff3d, #56e86b, #16c85a);
+  box-shadow: 0 10px 22px rgba(22,200,90,0.22);
+  transform: translateZ(0);
+}
+.tara-ibuGlow{
+  position:absolute;
+  inset: -24px;
+  background: radial-gradient(closest-side, rgba(22,200,90,0.18), transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+  opacity: .9;
 }
 
 .tara-lineupFooter{
@@ -582,5 +902,5 @@ body{
   display:flex;
   gap: 14px;
   flex-wrap: wrap;
-  font-weight: 900;
+  font-weight: 1000;
 }
